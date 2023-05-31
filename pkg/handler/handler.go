@@ -31,10 +31,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			work.PATCH("/:id")
 			work.DELETE("/:id")
 		}
-		chat := apiV2.Group("/chat")
-		{
-
-		}
 		posts := apiV2.Group("/posts")
 		{
 			posts.POST("/")
@@ -47,10 +43,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		{
 			subscribes.POST("/buy")
 			subscribes.POST("/cancel")
-		}
-		pays := apiV2.Group("/pays")
-		{
-
 		}
 	}
 	return router
