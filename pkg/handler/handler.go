@@ -15,9 +15,40 @@ func NewHandler(services *service.Service) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
+	auth := router.Group("/auth")
+	{
+		auth.POST("/register")
+		auth.POST("/login")
+		auth.POST("/profile")
+	}
 	apiV2 := router.Group("/api/v2/")
 	{
-		auth := apiV2.Group("/auth")
+		work := apiV2.Group("/work")
+		{
+			work.POST("/")
+			work.GET("/")
+			work.GET("/:id")
+			work.PATCH("/:id")
+			work.DELETE("/:id")
+		}
+		chat := apiV2.Group("/chat")
+		{
+
+		}
+		posts := apiV2.Group("/posts")
+		{
+			posts.POST("/")
+			posts.GET("/")
+			posts.GET("/:id")
+			posts.PATCH("/:id")
+			posts.DELETE("/:id")
+		}
+		subscribes := apiV2.Group("/subscribe")
+		{
+			subscribes.POST("/buy")
+			subscribes.POST("/cancel")
+		}
+		pays := apiV2.Group("/pays")
 		{
 
 		}
