@@ -1,6 +1,6 @@
 db:
-  Host:
-  Port:
-  DBName:
-  Username:
-  Password:
+  Host: 'localhost'
+  Port: '5436'
+  DBName: 'tow-work'
+  Username: 'postgres'
+  Password: '123321'

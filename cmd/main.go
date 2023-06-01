@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	TonWork "github.com/TonWork/back"
 	handlers "github.com/TonWork/back/pkg/handler"
 	repositoryes "github.com/TonWork/back/pkg/repository"
@@ -25,7 +27,7 @@ func main() {
 		DBName:   viper.GetString("db.DBName"),
 		SSLMode:  viper.GetString("db.SSLMode"),
 		Username: viper.GetString("db.Username"),
-		Password: viper.GetString("db.Password"),
+		Password: os.Getenv("DB_PASSWORD"),
 	})
 	if err != nil {
 		logrus.Fatalf("Error while connected to database: %s", err.Error())

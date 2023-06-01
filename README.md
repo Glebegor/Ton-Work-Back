@@ -4,3 +4,26 @@ If you need team, you will can create a find order on, for example, data science
 And you can pay for work by crypto currency(in our plan start from TON coint and move to another SOL, ETH, BTC...).
 
 <h3>Work with API</h3>
+<code>
+"/auth":
+    "/register"    POST 
+    "/login"       POST 
+    "/profile"     POST 
+
+"/api/v2/":
+    "/work":
+    	("/")      POST
+    	("/")      GET
+    	("/:id")   GET
+    	("/:id")   PATCH
+    	("/:id")   DELETE
+    "/posts":
+    	("/")      POST
+    	("/")      GET
+    	("/:id")   GET
+    	("/:id")   PATCH
+    	("/:id")   DELETE
+    "/subscribe":
+    	("/buy")   POST
+    	("/cancel")POST
+</code>
