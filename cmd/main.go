@@ -10,6 +10,8 @@ import (
 	godotenv "github.com/joho/godotenv"
 	logrus "github.com/sirupsen/logrus"
 	viper "github.com/spf13/viper"
+
+	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -36,10 +38,14 @@ func main() {
 	service := services.NewService(repository)
 	handler := handlers.NewHandler(service)
 	server := new(TonWork.Server)
-	if err := server.Run("8000", handler.InitRoutes()); err != nil {
+	go func() {
+		err := server.Run(viper.GetString("Port"), handler.InitRoutes())
+		if err != nil {
+			logrus.Fatalf("Error while running server: %s", err.Error())
+		}
+	}()
+	logrus.Printf("Server is loading on port %s.", viper.GetString("Port"))
 
-	}
-	return
 }
 
 func initConfig() error {
