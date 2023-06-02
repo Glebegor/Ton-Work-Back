@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"net/http"
-
 	service "github.com/TonWork/back/pkg/service"
 	gin "github.com/gin-gonic/gin"
 )
@@ -20,39 +18,33 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	router.Use(CORS())
 	auth := router.Group("/auth")
 	{
-		auth.POST("/register", h.HandlerEmptyFunc)
-		auth.POST("/login", h.HandlerEmptyFunc)
-		auth.POST("/profile", h.HandlerEmptyFunc)
+		auth.POST("/register", h.authReg)
+		auth.POST("/login", h.authLog)
+		auth.POST("/profile", h.authProfile)
 	}
 	apiV2 := router.Group("/api/v2/")
 	{
 		work := apiV2.Group("/work")
 		{
-			work.POST("/", h.HandlerEmptyFunc)
-			work.GET("/", h.HandlerEmptyFunc)
-			work.GET("/:id", h.HandlerEmptyFunc)
-			work.PATCH("/:id", h.HandlerEmptyFunc)
-			work.DELETE("/:id", h.HandlerEmptyFunc)
+			work.POST("/", h.workPOST)
+			work.GET("/", h.workALLGET)
+			work.GET("/:id", h.workGET)
+			work.PATCH("/:id", h.workPATCH)
+			work.DELETE("/:id", h.workDELETE)
 		}
 		posts := apiV2.Group("/posts")
 		{
-			posts.POST("/", h.HandlerEmptyFunc)
-			posts.GET("/", h.HandlerEmptyFunc)
-			posts.GET("/:id", h.HandlerEmptyFunc)
-			posts.PATCH("/:id", h.HandlerEmptyFunc)
-			posts.DELETE("/:id", h.HandlerEmptyFunc)
+			posts.POST("/", h.postsPOST)
+			posts.GET("/", h.postsALLGET)
+			posts.GET("/:id", h.postsGET)
+			posts.PATCH("/:id", h.postsPATCH)
+			posts.DELETE("/:id", h.postsDELETE)
 		}
 		subscribes := apiV2.Group("/subscribe")
 		{
-			subscribes.POST("/buy", h.HandlerEmptyFunc)
-			subscribes.POST("/cancel", h.HandlerEmptyFunc)
+			subscribes.POST("/buy", h.subscribesBuy)
+			subscribes.POST("/cancel", h.subscribesCancel)
 		}
 	}
 	return router
-}
-
-func (h *Handler) HandlerEmptyFunc(c *gin.Context) {
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"status": "ok",
-	})
 }
