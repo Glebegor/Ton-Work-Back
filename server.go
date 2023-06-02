@@ -1,6 +1,7 @@
 package TonWork
 
 import (
+	"context"
 	"net/http"
 	"time"
 )
@@ -18,4 +19,8 @@ func (s *Server) Run(port string, handler http.Handler) error {
 		WriteTimeout:   time.Second * 10,
 	}
 	return s.httpServer.ListenAndServe()
+}
+
+func (s *Server) Shuttdown(ctx context.Context) error {
+	return s.httpServer.Shutdown(ctx)
 }

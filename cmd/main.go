@@ -2,6 +2,8 @@ package main
 
 import (
 	"os"
+	"os/signal"
+	"syscall"
 
 	TonWork "github.com/TonWork/back"
 	handlers "github.com/TonWork/back/pkg/handler"
@@ -46,6 +48,9 @@ func main() {
 	}()
 	logrus.Printf("Server is loading on port %s.", viper.GetString("Port"))
 
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
 }
 
 func initConfig() error {
