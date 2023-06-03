@@ -25,8 +25,15 @@ func (h *Handler) authReg(c *gin.Context) {
 }
 
 func (h *Handler) authLog(c *gin.Context) {
+	var input TonWork.UserLogin
+	token, err := h.service.Authorization.LoginToAccount(input)
+	if err != nil {
+		newResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"status": "ok",
+		"token": token,
 	})
 }
 

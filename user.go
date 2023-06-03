@@ -1,15 +1,23 @@
 package TonWork
 
-type User struct {
+type UserProfile struct {
+	Telefon     string `json:"telefon"`
+	Position    string `json:"position"`
+	Description string `json:"description"`
+	Subscribe   string `json:"subscribe"`
+	Companies   string `json:"companies"`
+}
+
+type UserPreson struct {
 	Username      string `json:"username" binding:"required"`
 	Password_hash string `json:"password_hash" binding:"required"`
-	Email         string `json:"email" binding:"required"`
-	Telefon       string `json:"telefon"`
-	Position      string `json:"position"`
-	Description   string `json:"description"`
-	Subscribe     string `json:"subscribe"`
-	Companies     string `json:"companies"`
-	Name          string `json:"name"`
-	Surname       string `json:"surname"`
-	Id            int    `json:"id" db:"id"`
+}
+
+type User struct {
+	Person  UserPreson
+	Email   string `json:"email" binding:"required"`
+	Profile UserProfile
+	Name    string `json:"name"`
+	Surname string `json:"surname"`
+	Id      int    `json:"id" db:"id"`
 }

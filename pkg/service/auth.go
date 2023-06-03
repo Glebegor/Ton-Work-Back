@@ -18,11 +18,10 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 }
 
 func (s *AuthService) CreateUser(user TonWork.User) error {
-	user.Password_hash = s.PasswordHash(user.Password_hash)
+	user.Person.Password_hash = s.PasswordHash(user.Person.Password_hash)
 	if err := s.repo.CreateUser(user); err != nil {
 		return err
 	}
-
 	return nil
 }
 func (s *AuthService) PasswordHash(password string) string {
