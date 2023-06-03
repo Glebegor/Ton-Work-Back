@@ -7,6 +7,8 @@ CREATE TABLE users (
     description varchar(2000),
     subscribe varchar not null,
     companies varchar,
+    Name varchar,
+    Surname varchar,
     id serial not null unique
 );
 CREATE TABLE works (

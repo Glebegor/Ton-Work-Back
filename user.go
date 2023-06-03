@@ -9,5 +9,7 @@ type User struct {
 	Description   string `json:"description"`
 	Subscribe     string `json:"subscribe"`
 	Companies     string `json:"companies"`
+	Name          string `json:"name"`
+	Surname       string `json:"surname"`
 	Id            int    `json:"id" db:"id"`
 }
