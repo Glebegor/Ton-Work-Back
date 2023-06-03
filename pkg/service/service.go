@@ -8,6 +8,7 @@ import (
 type Authorization interface {
 	CreateUser(user TonWork.User) error
 	PasswordHash(password string) string
+	GenerateToken(input TonWork.UserPerson) (string, error)
 }
 type Work interface {
 }

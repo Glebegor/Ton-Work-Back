@@ -8,13 +8,13 @@ type UserProfile struct {
 	Companies   string `json:"companies"`
 }
 
-type UserPreson struct {
+type UserPerson struct {
 	Username      string `json:"username" binding:"required"`
 	Password_hash string `json:"password_hash" binding:"required"`
 }
 
 type User struct {
-	Person  UserPreson
+	Person  UserPerson
 	Email   string `json:"email" binding:"required"`
 	Profile UserProfile
 	Name    string `json:"name"`

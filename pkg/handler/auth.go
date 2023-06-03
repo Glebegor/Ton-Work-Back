@@ -25,10 +25,14 @@ func (h *Handler) authReg(c *gin.Context) {
 }
 
 func (h *Handler) authLog(c *gin.Context) {
-	var input TonWork.UserLogin
-	token, err := h.service.Authorization.LoginToAccount(input)
-	if err != nil {
+	var input TonWork.UserPerson
+	if err := c.BindJSON(&input); err != nil {
 		newResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	token, err := h.service.Authorization.GenerateToken(input)
+	if err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
 		return
 	}
 
