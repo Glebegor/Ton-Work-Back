@@ -14,7 +14,7 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 }
 
 func (s *AuthService) CreateUser(user TonWork.User) error {
-	if err := s.repo.Authorization.CreateUser(); err != nil {
+	if err := s.repo.CreateUser(user); err != nil {
 		return err
 	}
 

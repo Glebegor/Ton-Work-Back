@@ -6,6 +6,12 @@ import (
 	sqlx "github.com/jmoiron/sqlx"
 )
 
+const (
+	Table_users          = "users"
+	Table_works          = "works"
+	Table_users_to_works = "users_to_works"
+)
+
 type ConfigDB struct {
 	Host     string
 	Port     string
