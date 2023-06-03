@@ -7,6 +7,7 @@ import (
 
 type Authorization interface {
 	CreateUser(user TonWork.User) error
+	PasswordHash(password string) string
 }
 type Work interface {
 }
