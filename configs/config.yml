@@ -3,7 +3,7 @@ Host: "localhost"
 
 db:
   Host: 'localhost'
-  Port: '4444'
+  Port: '5436'
   DBName: 'postgres'
   SSLMode: "disable"
   Username: 'postgres'

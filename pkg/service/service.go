@@ -1,10 +1,12 @@
 package service
 
 import (
+	TonWork "github.com/TonWork/back"
 	repository "github.com/TonWork/back/pkg/repository"
 )
 
 type Authorization interface {
+	CreateUser(user TonWork.User) error
 }
 type Work interface {
 }
@@ -14,9 +16,11 @@ type Subscribes interface {
 }
 
 type Service struct {
-	repo repository.Repository
+	Authorization
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthService(repos.Authorization),
+	}
 }

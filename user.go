@@ -7,7 +7,7 @@ type User struct {
 	Telefon       string `json:"telefon"`
 	Position      string `json:"position"`
 	Description   string `json:"description"`
-	Subscribe     string `json:"subscribe" binding:"required"`
+	Subscribe     string `json:"subscribe"`
 	Companies     string `json:"companies"`
 	Id            int    `json:"id" db:"id"`
 }
