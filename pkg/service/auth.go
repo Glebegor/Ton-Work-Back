@@ -4,6 +4,7 @@ import (
 	"crypto/sha1"
 	"fmt"
 	"os"
+	"time"
 
 	TonWork "github.com/TonWork/back"
 	"github.com/TonWork/back/pkg/repository"
@@ -26,7 +27,7 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 }
 
 func (s *AuthService) CreateUser(user TonWork.User) error {
-	user.Person.Password_hash = s.PasswordHash(user.Person.Password_hash)
+	user.Password_hash = s.PasswordHash(user.Password_hash)
 	if err := s.repo.CreateUser(user); err != nil {
 		return err
 	}
@@ -37,7 +38,20 @@ func (s *AuthService) PasswordHash(password string) string {
 	hash.Write([]byte(password))
 	return fmt.Sprintf("%x", hash.Sum([]byte(os.Getenv("Secret_Key"))))
 }
-func (s *AuthService) GenerateToken(input TonWork.UserPerson) (string, error) {
-	user, err := s.repo.GetUser(input.Username, s.PasswordHash(input.Password_hash))
-	return
+func (s *AuthService) GenerateToken(username, password string) (string, error) {
+	user, err := s.repo.GetUser(username, s.PasswordHash(password))
+	if err != nil {
+		return "", err
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodES256, &TokenClaims{
+		jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(24 * time.Hour).Unix(),
+			IssuedAt:  time.Now().Unix(),
+		},
+		user.Id,
+		username,
+		user.Name,
+		user.Surname,
+	})
+	return token.SignedString([]byte(os.Getenv("Secret_key")))
 }

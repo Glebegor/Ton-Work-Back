@@ -7,6 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type LoginUser struct {
+	Username      string `json:"username" binding:"required"`
+	Password_hash string `json:"password_hash" binding:"required"`
+}
+
 func (h *Handler) authReg(c *gin.Context) {
 	var input TonWork.User
 	if err := c.BindJSON(&input); err != nil {
@@ -25,12 +30,12 @@ func (h *Handler) authReg(c *gin.Context) {
 }
 
 func (h *Handler) authLog(c *gin.Context) {
-	var input TonWork.UserPerson
+	var input LoginUser
 	if err := c.BindJSON(&input); err != nil {
 		newResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	token, err := h.service.Authorization.GenerateToken(input)
+	token, err := h.service.Authorization.GenerateToken(input.Username, input.Password_hash)
 	if err != nil {
 		newResponse(c, http.StatusBadGateway, err.Error())
 		return
