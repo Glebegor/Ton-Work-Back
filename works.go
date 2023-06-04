@@ -12,5 +12,5 @@ type Work struct {
 	Type_of_job     string   `json:"type_of_job" `
 	Invites         int      `json:"invites" `
 	Rating          int      `json:"rating" binding:"required"`
-	Id              int      `json:"id" db:'id'`
+	Id              int      `json:"id" db:"id"`
 }

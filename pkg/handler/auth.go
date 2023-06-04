@@ -47,7 +47,22 @@ func (h *Handler) authLog(c *gin.Context) {
 }
 
 func (h *Handler) authProfile(c *gin.Context) {
+	userParam := c.Params.ByName("Profile_Username")
+
+	data, err := h.service.Authorization.GetUserProfile(userParam)
+	if err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"status": "ok",
+		"username":    data.Username,
+		"email":       data.Email,
+		"telefon":     data.Telefon,
+		"position":    data.Position,
+		"description": data.Description,
+		"subscribe":   data.Subscribe,
+		"companies":   data.Companies,
+		"name":        data.Name,
+		"Surname":     data.Surname,
 	})
 }

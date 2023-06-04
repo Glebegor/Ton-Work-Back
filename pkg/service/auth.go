@@ -55,3 +55,10 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	})
 	return token.SignedString([]byte(os.Getenv("Secret_Key")))
 }
+func (s *AuthService) GetUserProfile(param string) (TonWork.User, error) {
+	user, err := s.repo.GetUserPorfile(param)
+	if err != nil {
+		return TonWork.User{}, err
+	}
+	return user, nil
+}

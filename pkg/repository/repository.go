@@ -8,6 +8,7 @@ import (
 type Authorization interface {
 	CreateUser(TonWork.User) error
 	GetUser(username, password string) (TonWork.User, error)
+	GetUserPorfile(username string) (TonWork.User, error)
 }
 type Work interface {
 }

@@ -30,3 +30,9 @@ func (r *AuthPostgres) GetUser(username, password string) (TonWork.User, error) 
 	err := r.db.Get(&user, query, username, password)
 	return user, err
 }
+func (r *AuthPostgres) GetUserPorfile(username string) (TonWork.User, error) {
+	var user TonWork.User
+	query := fmt.Sprintf("SELECT * FROM %s WHERE username=$1", Table_users)
+	err := r.db.Get(&user, query, username)
+	return user, err
+}
