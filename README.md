@@ -56,56 +56,28 @@ And you can pay for work by crypto currency(in our plan start from TON coint and
 <h3>Requests and responses on every link</h3>
 <hr>
 <h4>"/auth/register", method:POST.</h4>
-Request json:
-{
-      "username": "User Name",
-      "password": "123456789",
-      "email": "nickname@gmail.com"
-}<br>
-Response json:
-{
-      "Status": "OK"
-}<br>
-Error response:
-{
-      "message": "Some text"
-}
+
+Type | JSON 
+--- | ---
+Request | { "username": "User Name", "password": "123456789", "email": "nickname@gmail.com" }
+Response | { "Status": "OK" } 
+Error Response | { "message": "Some text" } 
+
 <hr>
 <h4>"/auth/login", method:POST.</h4>
-Request json:
-{
-      "username": "User Name",
-      "password": "123456789"
-}<br>
-Response json:
-{
-      "token": "wqewqeqwr123o1kepo2k-c439!(#_$I(#$.@)#@!O)$K@J)!$.!@(#JWJDWADISIADOUI"
-}<br>
-Error response:
-{
-      "message": "Some text"
-}
+
+Type | JSON 
+--- | ---
+Request | { "username": "User Name", "password": "123456789" }
+Response | { "token": "wqewqeqwr123o1kepo2k-c439!(#_$I(#$.@)#@!O)$K@J)!$.!@(#JWJDWADISIADOUI" }
+Error Response | { "message": "Some text" } 
+
 <hr>
 <h4>"/auth/profile", method:GET.</h4>
-Request json:
-{
-      "username": "User Name"
-}<br>
-Response json:
-{
-      "username": "User name"
-      "email": "email@gmail.com"
-      "telefon": ""
-      "position": "Position"
-      "description": "Description text"
-      "subscribe": "Subscribe"
-      "companies": "Companies"
-      "name": "name"
-      "surname": "surname"
-      "id": "id"
-}<br>
-Error response:
-{
-      "message": "Some text"
-}
+
+Type | JSON 
+--- | ---
+Request | { "username": "User Name" }
+Response | { "username": "User name" "email": "email@gmail.com" "telefon": "" "position": "Position" "description": "Description text" "subscribe": "Subscribe" "companies": "Companies" "name": "name" "surname": "surname" "id": "id" }
+Error Response | { "message": "Some text" } 
 
