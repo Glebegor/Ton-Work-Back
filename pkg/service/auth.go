@@ -17,9 +17,9 @@ type AuthService struct {
 type TokenClaims struct {
 	jwt.StandardClaims
 	UserId       int
-	UserUsername string `json: "user_id"`
-	UserName     string `json: "user_username"`
-	UserSurname  string `json: "user_surname"`
+	UserUsername string `json:"user_username"`
+	UserName     string `json:"user_name"`
+	UserSurname  string `json:"user_surname"`
 }
 
 func NewAuthService(repo repository.Authorization) *AuthService {
@@ -43,7 +43,7 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, &TokenClaims{
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &TokenClaims{
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(24 * time.Hour).Unix(),
 			IssuedAt:  time.Now().Unix(),
@@ -53,5 +53,5 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 		user.Name,
 		user.Surname,
 	})
-	return token.SignedString([]byte(os.Getenv("Secret_key")))
+	return token.SignedString([]byte(os.Getenv("Secret_Key")))
 }

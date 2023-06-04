@@ -78,6 +78,6 @@ Error Response | { "message": "Some text" }
 Type | JSON 
 --- | ---
 Request | { "username": "User Name" }
-Response | { "username": "User name" "email": "email@gmail.com" "telefon": "" "position": "Position" "description": "Description text" "subscribe": "Subscribe" "companies": "Companies" "name": "name" "surname": "surname" "id": "id" }
+Response | { "username": "User name", "email": "email@gmail.com", "telefon": "+3242 3242 432", "position": "Position", "description": "Description text", "subscribe": "Subscribe", "companies": "Companies", "name": "name", "surname": "Surname", "id": "Id" }
 Error Response | { "message": "Some text" } 
 

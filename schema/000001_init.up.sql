@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    username varchar(255) not null,
+    username varchar(255) not null unique,
     password_hash varchar(255) not null,
     email varchar(255) not null,
     telefon varchar(255),
