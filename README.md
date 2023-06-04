@@ -73,11 +73,11 @@ Response | { "token": "wqewqeqwr123o1kepo2k-c439!(#_$I(#$.@)#@!O)$K@J)!$.!@(#JWJ
 Error Response | { "message": "Some text" } 
 
 <hr>
-<h4>"/auth/profile", method:GET.</h4>
+<h4>"/auth/profile/${Username}", method:GET.</h4>
 
 Type | JSON 
 --- | ---
-Request | { "username": "User Name" }
+Request | write param to url, example: "/auth/profile/Glebegor"
 Response | { "username": "User name", "email": "email@gmail.com", "telefon": "+3242 3242 432", "position": "Position", "description": "Description text", "subscribe": "Subscribe", "companies": "Companies", "name": "name", "surname": "Surname", "id": "Id" }
 Error Response | { "message": "Some text" } 
 
