@@ -52,6 +52,12 @@ And you can pay for work by crypto currency(in our plan start from TON coint and
 "/api/v2/subscribe/buy"    POST<br>
 "/api/v2/subscribe/cancel" POST<br>
 
+<h3>JWT token and his structure</h3>
+JWT token looks like this:
+<code>qweioucu34ioslk1j23lkjds.dkowjrlekwjriodfslvvldkwsjqr.dsfouqweopriuoiu3oi3o2uadflsk</code>
+And has three parts: header.payload.signature<br>
+claims of our JWT token: userId, userUsername, userName, userSurname.<br>
+Please, save in cookies or session storage.  
 
 <h3>Requests and responses on every link</h3>
 <hr>
