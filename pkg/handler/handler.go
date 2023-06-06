@@ -26,17 +26,26 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		work := apiV2.Group("/work")
 		{
-			work.POST("/", h.workPOST)
-			work.GET("/", h.workALLGET)
-			work.GET("/:id", h.workGET)
-			work.PATCH("/:id", h.workPATCH)
-			work.DELETE("/:id", h.workDELETE)
+			noIndentification := work.Group("/")
+			{
+				noIndentification.GET("", h.workALLGET)
+				noIndentification.GET(":id", h.workGET)
+			}
+			Indentification := work.Group("/", h.Indentification)
+			{
+				Indentification.POST("", h.workPOST)
+				Indentification.PATCH(":id", h.workPATCH)
+				Indentification.DELETE(":id", h.workDELETE)
+			}
+
 		}
+
 		posts := apiV2.Group("/posts")
 		{
-			posts.POST("/", h.postsPOST)
 			posts.GET("/", h.postsALLGET)
 			posts.GET("/:id", h.postsGET)
+
+			posts.POST("/", h.postsPOST)
 			posts.PATCH("/:id", h.postsPATCH)
 			posts.DELETE("/:id", h.postsDELETE)
 		}
