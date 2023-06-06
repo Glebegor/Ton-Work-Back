@@ -44,22 +44,22 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		{
 			noIndentification := posts.Group("/")
 			{
-				noIndentification.GET("/", h.postsALLGET)
-				noIndentification.GET("/:id", h.postsGET)
+				noIndentification.GET("", h.postsALLGET)
+				noIndentification.GET(":id", h.postsGET)
 			}
 			Indentification := posts.Group("/", h.Indentification)
 			{
-				Indentification.POST("/", h.postsPOST)
-				Indentification.PATCH("/:id", h.postsPATCH)
-				Indentification.DELETE("/:id", h.postsDELETE)
+				Indentification.POST("", h.postsPOST)
+				Indentification.PATCH(":id", h.postsPATCH)
+				Indentification.DELETE(":id", h.postsDELETE)
 			}
 		}
 		subscribes := apiV2.Group("/subscribe")
 		{
 			Indentification := subscribes.Group("/", h.Indentification)
 			{
-				Indentification.POST("/buy", h.subscribesBuy)
-				Indentification.POST("/cancel", h.subscribesCancel)
+				Indentification.POST("buy", h.subscribesBuy)
+				Indentification.POST("cancel", h.subscribesCancel)
 			}
 		}
 	}
