@@ -13,7 +13,8 @@ type Authorization interface {
 	GetUserProfile(param string) (TonWork.User, error)
 }
 type Work interface {
-	GetAll() ([]TonWork.Work, error)
+	GetAll([]TonWork.Work, error)
+	Create(int, TonWork.Work) error
 }
 type Posts interface {
 }

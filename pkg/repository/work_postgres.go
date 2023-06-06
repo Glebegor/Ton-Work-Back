@@ -21,3 +21,6 @@ func (r *WorkPostgres) GetAll() ([]TonWork.Work, error) {
 	err := r.db.Select(&data, query)
 	return data, err
 }
+func (r *WorkPostgres) Create(int, TonWork.Work) error {
+
+}
