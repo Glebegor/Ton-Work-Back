@@ -42,17 +42,25 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		posts := apiV2.Group("/posts")
 		{
-			posts.GET("/", h.postsALLGET)
-			posts.GET("/:id", h.postsGET)
-
-			posts.POST("/", h.postsPOST)
-			posts.PATCH("/:id", h.postsPATCH)
-			posts.DELETE("/:id", h.postsDELETE)
+			noIndentification := posts.Group("/")
+			{
+				noIndentification.GET("/", h.postsALLGET)
+				noIndentification.GET("/:id", h.postsGET)
+			}
+			Indentification := posts.Group("/", h.Indentification)
+			{
+				Indentification.POST("/", h.postsPOST)
+				Indentification.PATCH("/:id", h.postsPATCH)
+				Indentification.DELETE("/:id", h.postsDELETE)
+			}
 		}
 		subscribes := apiV2.Group("/subscribe")
 		{
-			subscribes.POST("/buy", h.subscribesBuy)
-			subscribes.POST("/cancel", h.subscribesCancel)
+			Indentification := subscribes.Group("/", h.Indentification)
+			{
+				Indentification.POST("/buy", h.subscribesBuy)
+				Indentification.POST("/cancel", h.subscribesCancel)
+			}
 		}
 	}
 	return router
