@@ -13,6 +13,7 @@ type Authorization interface {
 	GetUserProfile(param string) (TonWork.User, error)
 }
 type Work interface {
+	GetAll() ([]TonWork.Work, error)
 }
 type Posts interface {
 }
@@ -21,10 +22,16 @@ type Subscribes interface {
 
 type Service struct {
 	Authorization
+	Work
+	Posts
+	Subscribes
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
+		Work:          NewWorkService(repos.Work),
+		Posts:         nil,
+		Subscribes:    nil,
 	}
 }

@@ -11,6 +11,7 @@ type Authorization interface {
 	GetUserPorfile(username string) (TonWork.User, error)
 }
 type Work interface {
+	GetAll() ([]TonWork.Work, error)
 }
 type Posts interface {
 }
@@ -26,7 +27,7 @@ type Repository struct {
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
-		Work:          nil,
+		Work:          NewWorkPostgres(db),
 		Posts:         nil,
 		Subscribes:    nil,
 	}
