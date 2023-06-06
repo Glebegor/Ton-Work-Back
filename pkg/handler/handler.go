@@ -45,7 +45,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			noIndentification := posts.Group("/")
 			{
 				noIndentification.GET("", h.postsALLGET)
-				noIndentification.GET(":id", h.postsGET)
+				noIndentification.GET("get/:id", h.postsGET)
 			}
 			Indentification := posts.Group("/", h.Indentification)
 			{

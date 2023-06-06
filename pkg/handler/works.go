@@ -12,8 +12,13 @@ func (h *Handler) workPOST(c *gin.Context) {
 	})
 }
 func (h *Handler) workALLGET(c *gin.Context) {
+	data, err := h.service.Work.GetAll()
+	if err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"Status": "OK",
+		"data": data,
 	})
 }
 func (h *Handler) workGET(c *gin.Context) {
