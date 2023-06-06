@@ -12,18 +12,18 @@ CREATE TABLE users (
     id serial not null unique
 );
 CREATE TABLE works (
-    Title varchar(255),
-	Description varchar(255),
-	Text varchar(2000),
-	Tags varchar(2000),
-	Technologies varchar(2000),
-	Company varchar(2000),
-	Price int,
-	ExperienceLevel varchar(200),
+    title varchar(255),
+	description varchar(255),
+	text varchar(2000),
+	tags varchar(2000),
+	technologies varchar(2000),
+	company varchar(2000),
+	price int,
+	experienceLevel varchar(200),
 	type_of_job varchar(255),
 	invites int,
-	Rating int,
-	Id serial not null unique
+	rating int,
+	id serial not null unique
 );
 CREATE TABLE users_to_works (
     id serial not null unique,

@@ -17,7 +17,7 @@ func (s *WorkService) GetAll() ([]TonWork.Work, error) {
 	data, err := s.repo.GetAll()
 	return data, err
 }
-func (s *WorkService) Create(UserId, data) error {
-	err := s.repo.Create()
+func (s *WorkService) Create(UserId int, data TonWork.Work) error {
+	err := s.repo.Create(UserId, data)
 	return err
 }
