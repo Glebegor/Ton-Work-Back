@@ -64,7 +64,7 @@ func (s *AuthService) GetUserProfile(param string) (TonWork.User, error) {
 	return user, nil
 }
 
-func ParseToken(accesToken string) (int, string, string, string, error) {
+func (s *AuthService) ParseToken(accesToken string) (int, string, string, string, error) {
 	token, err := jwt.ParseWithClaims(accesToken, &TokenClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("Invalid signature method")
