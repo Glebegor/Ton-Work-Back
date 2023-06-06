@@ -8,7 +8,7 @@ And you can pay for work by crypto currency(in our plan start from TON coint and
 1. "/auth":
       - "/register"   POST
       - "/login"      POST
-      - "/profile"    POST
+      - "/profile"    GET
 2. "/api/v2/":
       - "/work":
           - "/"       POST

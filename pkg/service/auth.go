@@ -2,6 +2,7 @@ package service
 
 import (
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"os"
 	"time"
@@ -61,4 +62,21 @@ func (s *AuthService) GetUserProfile(param string) (TonWork.User, error) {
 		return TonWork.User{}, err
 	}
 	return user, nil
+}
+
+func ParseToken(accesToken string) (int, string, string, string, error) {
+	token, err := jwt.ParseWithClaims(accesToken, &TokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("Invalid signature method")
+		}
+		return []byte(os.Getenv("Secret_Key")), nil
+	})
+	if err != nil {
+		return 0, "", "", "", err
+	}
+	claims, ok := token.Claims.(*TokenClaims)
+	if !ok {
+		return 0, "", "", "", errors.New("Token claims are not of type *TokenClaims")
+	}
+	return claims.UserId, claims.UserUsername, claims.UserName, claims.UserSurname, nil
 }

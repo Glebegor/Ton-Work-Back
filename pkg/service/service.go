@@ -9,6 +9,7 @@ type Authorization interface {
 	CreateUser(user TonWork.User) error
 	PasswordHash(password string) string
 	GenerateToken(username, password string) (string, error)
+	ParseToken(accesToken string) (int, string, string, string, error)
 	GetUserProfile(param string) (TonWork.User, error)
 }
 type Work interface {
