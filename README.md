@@ -58,7 +58,8 @@ JWT token looks like this:
 <code>qweioucu34ioslk1j23lkjds.dkowjrlekwjriodfslvvldkwsjqr.dsfouqweopriuoiu3oi3o2uadflsk</code>
 And has three parts: header.payload.signature<br>
 Claims of our JWT token: userId, userUsername, userName, userSurname.<br>
-Please, save in cookies or session storage.  
+Please, save in cookies or session storage. <br>
+Header for token: Authorization.<br> 
 
 <h3>Requests and responses on every link</h3>
 <hr>
