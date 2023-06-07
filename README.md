@@ -67,7 +67,7 @@ Header for token: Authorization.<br>
 
 Type | JSON 
 --- | ---
-Request | { "username": "User Name", "password": "123456789", "email": "nickname@gmail.com" }
+Request | { "username": "User Name", "password_hash": "123456789", "email": "nickname@gmail.com" }
 Response | { "Status": "OK" } 
 Error Response | { "message": "Some text" } 
 
@@ -76,7 +76,7 @@ Error Response | { "message": "Some text" }
 
 Type | JSON 
 --- | ---
-Request | { "username": "User Name", "password": "123456789" }
+Request | { "username": "User Name", "password_hash": "123456789" }
 Response | { "token": "wqewqeqwr123o1kepo2k-c439!(#_$I(#$.@)#@!O)$K@J)!$.!@(#JWJDWADISIADOUI" }
 Error Response | { "message": "Some text" } 
 
