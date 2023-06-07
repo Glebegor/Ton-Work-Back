@@ -17,6 +17,8 @@ type Work interface {
 	Create(int, TonWork.Work) error
 }
 type Posts interface {
+	GetAll() ([]TonWork.Post, error)
+	Create(int, TonWork.Post) error
 }
 type Subscribes interface {
 }
@@ -32,7 +34,7 @@ func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
 		Work:          NewWorkService(repos.Work),
-		Posts:         nil,
+		Posts:         NewPostService(repos.Post),
 		Subscribes:    nil,
 	}
 }

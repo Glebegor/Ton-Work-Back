@@ -14,7 +14,7 @@ type Work interface {
 	GetAll() ([]TonWork.Work, error)
 	Create(int, TonWork.Work) error
 }
-type Posts interface {
+type Post interface {
 	GetAll() ([]TonWork.Post, error)
 	Create(int, TonWork.Post) error
 }
@@ -23,7 +23,7 @@ type Subscribes interface {
 type Repository struct {
 	Authorization
 	Work
-	Posts
+	Post
 	Subscribes
 }
 
@@ -31,7 +31,7 @@ func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
 		Work:          NewWorkPostgres(db),
-		Posts:         NewPostPostgres(db),
+		Post:          NewPostPostgres(db),
 		Subscribes:    nil,
 	}
 }
