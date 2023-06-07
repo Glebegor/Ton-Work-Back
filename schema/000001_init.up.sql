@@ -25,8 +25,21 @@ CREATE TABLE works (
 	rating int,
 	id serial not null unique
 );
+CREATE TABLE posts (
+    title varchar(255),
+    description varchar(255),
+    text varchar(2000),
+    tags varchar(2000),
+    rating int,
+    id serial not null unique
+);
 CREATE TABLE users_to_works (
     id serial not null unique,
     id_user int references users(id) on delete cascade not null,
     id_works int references works(id) on delete cascade not null
+);
+CREATE TABLE users_to_posts (
+    id serial not null unique,
+    id_user int references users(id) on delete cascade not null,
+    id_posts int references posts(id) on delete cascade not null
 );

@@ -9,7 +9,9 @@ import (
 const (
 	Table_users          = "users"
 	Table_works          = "works"
+	Table_posts          = "posts"
 	Table_users_to_works = "users_to_works"
+	Table_users_to_posts = "users_to_posts"
 )
 
 type ConfigDB struct {
