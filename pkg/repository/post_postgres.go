@@ -27,7 +27,7 @@ func (r *PostPostgres) Create(userId int, data TonWork.Post) error {
 		return err
 	}
 	var id int
-	createPostQuery := fmt.Sprintf("INSERT INTO %s (title, description, text, tags, rating) VALUES ($1, $2, $3, $4, $5) RETURNING id", Table_works)
+	createPostQuery := fmt.Sprintf("INSERT INTO %s (title, description, text, tags, rating) VALUES ($1, $2, $3, $4, $5) RETURNING id", Table_posts)
 	row := tx.QueryRow(createPostQuery, data.Title, data.Description, data.Text, data.Tags, data.Rating)
 	if err := row.Scan(&id); err != nil {
 		tx.Rollback()

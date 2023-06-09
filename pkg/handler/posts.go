@@ -8,21 +8,6 @@ import (
 )
 
 func (h *Handler) postsPOST(c *gin.Context) {
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"Status": "OK",
-	})
-}
-func (h *Handler) postsALLGET(c *gin.Context) {
-	data, err := h.service.Posts.GetAll()
-	if err != nil {
-		newResponse(c, http.StatusBadGateway, err.Error())
-		return
-	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data": data,
-	})
-}
-func (h *Handler) postsGET(c *gin.Context) {
 	var input TonWork.Post
 	if err := c.BindJSON(&input); err != nil {
 		newResponse(c, http.StatusBadRequest, err.Error())
@@ -38,6 +23,21 @@ func (h *Handler) postsGET(c *gin.Context) {
 		newResponse(c, http.StatusBadGateway, err.Error())
 		return
 	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"Status": "OK",
+	})
+}
+func (h *Handler) postsALLGET(c *gin.Context) {
+	data, err := h.service.Posts.GetAll()
+	if err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"data": data,
+	})
+}
+func (h *Handler) postsGET(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"Status": "OK",
 	})
