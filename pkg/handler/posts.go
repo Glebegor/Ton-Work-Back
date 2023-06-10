@@ -56,6 +56,17 @@ func (h *Handler) postsGET(c *gin.Context) {
 
 }
 func (h *Handler) postsPUT(c *gin.Context) {
+	id := c.Params.ByName("id")
+	idInt, _ := strconv.Atoi(id)
+	var input TonWork.PostUpdate
+	if err := c.BindJSON(&input); err != nil {
+		newResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	if err := h.service.Posts.Update(idInt, input); err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"Status": "OK",
 	})

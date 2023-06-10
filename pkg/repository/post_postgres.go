@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"strings"
 
 	TonWork "github.com/TonWork/back"
 	"github.com/jmoiron/sqlx"
@@ -46,4 +47,34 @@ func (r *PostPostgres) GetById(id int) (TonWork.Post, error) {
 	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1", Table_posts)
 	err := r.db.Get(&data, query, id)
 	return data, err
+}
+func (r *PostPostgres) Update(id string, input TonWork.PostUpdate) error {
+	setValues := make([]string, 0)
+	args := make([]interface{}, 0)
+	argId := 1
+	if input.Title != nil {
+		setValues = append(setValues, fmt.Sprintf("title=$%d", argId))
+		args = append(args, *input.Title)
+		argId++
+	}
+	if input.Description != nil {
+		setValues = append(setValues, fmt.Sprintf("description=$%d", argId))
+		args = append(args, *input.Description)
+		argId++
+	}
+	if input.Text != nil {
+		setValues = append(setValues, fmt.Sprintf("text=$%d", argId))
+		args = append(args, *input.Text)
+		argId++
+	}
+	if input.Tags != nil {
+		setValues = append(setValues, fmt.Sprintf("tags=$%d", argId))
+		args = append(args, *input.Tags)
+		argId++
+	}
+	setQuery := strings.Join(setValues, ", ")
+
+	query := fmt.Sprintf("UPDATE %s SET %s WHERE id=%s", Table_posts, setQuery, id)
+	_, err := r.db.Exec(query, args...)
+	return err
 }
