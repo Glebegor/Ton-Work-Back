@@ -1,6 +1,8 @@
 package service
 
 import (
+	"strconv"
+
 	TonWork "github.com/TonWork/back"
 	"github.com/TonWork/back/pkg/repository"
 )
@@ -21,4 +23,9 @@ func (s *WorkService) Create(UserId int, data TonWork.Work) error {
 }
 func (s *WorkService) GetById(id int) (TonWork.Work, error) {
 	return s.repo.GetById(id)
+}
+func (s *WorkService) Update(id int, input TonWork.WorkUpdate) error {
+	idStr := strconv.Itoa(id)
+	err := s.repo.Update(idStr, input)
+	return err
 }

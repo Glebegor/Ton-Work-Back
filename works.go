@@ -14,3 +14,14 @@ type Work struct {
 	Rating          int    `json:"rating" binding:"required"`
 	Id              int    `json:"id" db:"id"`
 }
+type WorkUpdate struct {
+	Title           *string `json:"title"`
+	Description     *string `json:"description"`
+	Text            *string `json:"text"`
+	Tags            *string `json:"tags"`
+	Technologies    *string `json:"technologies" `
+	Company         *string `json:"company" `
+	Price           *int    `json:"price"`
+	ExperienceLevel *string `json:"experienceLevel"`
+	Type_of_job     *string `json:"type_of_job" `
+}

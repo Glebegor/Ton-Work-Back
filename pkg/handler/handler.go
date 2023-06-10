@@ -34,7 +34,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			Indentification := work.Group("/", h.Indentification)
 			{
 				Indentification.POST("", h.workPOST)
-				Indentification.PATCH(":id", h.workPATCH)
+				Indentification.PUT(":id", h.workPUT)
 				Indentification.DELETE(":id", h.workDELETE)
 			}
 
@@ -50,7 +50,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			Indentification := posts.Group("/", h.Indentification)
 			{
 				Indentification.POST("", h.postsPOST)
-				Indentification.PATCH(":id", h.postsPATCH)
+				Indentification.PUT(":id", h.postsPUT)
 				Indentification.DELETE(":id", h.postsDELETE)
 			}
 		}

@@ -55,7 +55,7 @@ func (h *Handler) postsGET(c *gin.Context) {
 	})
 
 }
-func (h *Handler) postsPATCH(c *gin.Context) {
+func (h *Handler) postsPUT(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"Status": "OK",
 	})

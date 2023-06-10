@@ -13,12 +13,13 @@ type Authorization interface {
 type Work interface {
 	GetAll() ([]TonWork.Work, error)
 	Create(int, TonWork.Work) error
-	GetById(id int) (TonWork.Work, error)
+	GetById(int) (TonWork.Work, error)
+	Update(string, TonWork.WorkUpdate) error
 }
 type Post interface {
 	GetAll() ([]TonWork.Post, error)
 	Create(int, TonWork.Post) error
-	GetById(id int) (TonWork.Post, error)
+	GetById(int) (TonWork.Post, error)
 }
 type Subscribes interface {
 }
