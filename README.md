@@ -26,24 +26,24 @@ And you can pay for work by crypto currency(in our plan start from TON coint and
           - "/buy"    POST
           - "/cancel" POST
          
-<h4>Or you can see it in this format:</h4><br>
+<h4>Or you can see it in this format(where it is made there is a "+"):</h4><br>
 "/auth":<br>
-"/auth/register"           POST<br>
-"/auth/login"              POST<br>
-"/auth/profile"            GET<br>
+"/auth/register"           POST+<br>
+"/auth/login"              POST+<br>
+"/auth/profile"            GET+<br>
 <br>
 "/api/v2/":<br>
 <br>
 "/api/v2/work":<br>
-"/api/v2/work/"            POST<br>
-"/api/v2/work/"            GET<br>
+"/api/v2/work/"            POST+<br>
+"/api/v2/work/"            GET+<br>
 "/api/v2/work/:id"         GET<br>
 "/api/v2/work/:id"         PATCH<br>
 "/api/v2/work/:id"         DELETE<br>
 <br>
 "/api/v2/posts":<br>
-"/api/v2/posts/"           POST<br>
-"/api/v2/posts/"           GET<br>
+"/api/v2/posts/"           POST+<br>
+"/api/v2/posts/"           GET+<br>
 "/api/v2/posts/:id"        GET<br>
 "/api/v2/posts/:id"        PATCH<br>
 "/api/v2/posts/:id"        DELETE<br>

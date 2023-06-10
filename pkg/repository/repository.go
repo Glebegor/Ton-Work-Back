@@ -17,6 +17,7 @@ type Work interface {
 type Post interface {
 	GetAll() ([]TonWork.Post, error)
 	Create(int, TonWork.Post) error
+	GetById(id int) (TonWork.Post, error)
 }
 type Subscribes interface {
 }

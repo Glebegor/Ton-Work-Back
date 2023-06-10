@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	TonWork "github.com/TonWork/back"
 	"github.com/gin-gonic/gin"
@@ -38,9 +39,21 @@ func (h *Handler) postsALLGET(c *gin.Context) {
 	})
 }
 func (h *Handler) postsGET(c *gin.Context) {
+	id := c.Params.ByName("id")
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		newResponse(c, http.StatusNotFound, err.Error())
+		return
+	}
+	data, err := h.service.Posts.GetById(idInt)
+	if err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"Status": "OK",
+		"data": data,
 	})
+
 }
 func (h *Handler) postsPATCH(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
