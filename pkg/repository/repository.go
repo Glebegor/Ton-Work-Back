@@ -13,6 +13,7 @@ type Authorization interface {
 type Work interface {
 	GetAll() ([]TonWork.Work, error)
 	Create(int, TonWork.Work) error
+	GetById(id int) (TonWork.Work, error)
 }
 type Post interface {
 	GetAll() ([]TonWork.Post, error)

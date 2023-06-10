@@ -41,3 +41,9 @@ func (r *WorkPostgres) Create(userId int, data TonWork.Work) error {
 	}
 	return tx.Commit()
 }
+func (r *WorkPostgres) GetById(id int) (TonWork.Work, error) {
+	var data TonWork.Work
+	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1", Table_works)
+	err := r.db.Get(&data, query, id)
+	return data, err
+}

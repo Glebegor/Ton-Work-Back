@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	TonWork "github.com/TonWork/back"
 	"github.com/gin-gonic/gin"
@@ -38,8 +39,15 @@ func (h *Handler) workALLGET(c *gin.Context) {
 	})
 }
 func (h *Handler) workGET(c *gin.Context) {
+	id := c.Params.ByName("id")
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		newResponse(c, http.StatusNotFound, err.Error())
+		return
+	}
+	data, err := h.service.Work.GetById(idInt)
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"Status": "OK",
+		"data": data,
 	})
 }
 func (h *Handler) workPATCH(c *gin.Context) {

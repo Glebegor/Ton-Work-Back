@@ -14,10 +14,11 @@ func NewWorkService(repo repository.Work) *WorkService {
 }
 
 func (s *WorkService) GetAll() ([]TonWork.Work, error) {
-	data, err := s.repo.GetAll()
-	return data, err
+	return s.repo.GetAll()
 }
 func (s *WorkService) Create(UserId int, data TonWork.Work) error {
-	err := s.repo.Create(UserId, data)
-	return err
+	return s.repo.Create(UserId, data)
+}
+func (s *WorkService) GetById(id int) (TonWork.Work, error) {
+	return s.repo.GetById(id)
 }
