@@ -37,16 +37,16 @@ And you can pay for work by crypto currency(in our plan start from TON coint and
 "/api/v2/work":<br>
 "/api/v2/work/"            POST+<br>
 "/api/v2/work/"            GET+<br>
-"/api/v2/work/:id"         GET<br>
-"/api/v2/work/:id"         PATCH<br>
-"/api/v2/work/:id"         DELETE<br>
+"/api/v2/work/:id"         GET+<br>
+"/api/v2/work/:id"         PATCH+<br>
+"/api/v2/work/:id"         DELETE+<br>
 <br>
 "/api/v2/posts":<br>
 "/api/v2/posts/"           POST+<br>
 "/api/v2/posts/"           GET+<br>
-"/api/v2/posts/:id"        GET<br>
-"/api/v2/posts/:id"        PATCH<br>
-"/api/v2/posts/:id"        DELETE<br>
+"/api/v2/posts/:id"        GET+<br>
+"/api/v2/posts/:id"        PATCH+<br>
+"/api/v2/posts/:id"        DELETE+<br>
 <br>
 "/api/v2/subscribe":<br>
 "/api/v2/subscribe/buy"    POST<br>
