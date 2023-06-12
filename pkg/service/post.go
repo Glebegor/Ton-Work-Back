@@ -29,3 +29,8 @@ func (s *PostService) Update(id int, input TonWork.PostUpdate) error {
 	err := s.repo.Update(idStr, input)
 	return err
 }
+func (s *PostService) Delete(id int) error {
+	idStr := strconv.Itoa(id)
+	err := s.repo.Delete(idStr)
+	return err
+}

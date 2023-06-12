@@ -21,6 +21,7 @@ type Post interface {
 	Create(int, TonWork.Post) error
 	GetById(int) (TonWork.Post, error)
 	Update(string, TonWork.PostUpdate) error
+	Delete(string) error
 }
 type Subscribes interface {
 }

@@ -72,6 +72,12 @@ func (h *Handler) postsPUT(c *gin.Context) {
 	})
 }
 func (h *Handler) postsDELETE(c *gin.Context) {
+	id := c.Params.ByName("id")
+	idInt, _ := strconv.Atoi(id)
+	if err := h.service.Posts.Delete(idInt); err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"Status": "OK",
 	})

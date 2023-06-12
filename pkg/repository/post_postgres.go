@@ -78,3 +78,8 @@ func (r *PostPostgres) Update(id string, input TonWork.PostUpdate) error {
 	_, err := r.db.Exec(query, args...)
 	return err
 }
+func (r *PostPostgres) Delete(id string) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id=$1", Table_posts)
+	_, err := r.db.Exec(query, id)
+	return err
+}
