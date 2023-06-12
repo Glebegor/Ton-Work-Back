@@ -62,6 +62,7 @@ Please, save in cookies or session storage. <br>
 Header for token: Authorization.<br> 
 
 <h3>Requests and responses on every link</h3>
+<h3>AUTH</h3>
 <hr>
 <h4>"/auth/register", method:POST.</h4>
 
@@ -71,7 +72,6 @@ Request | { "username": "User Name", "password_hash": "123456789", "email": "nic
 Response | { "Status": "OK" } 
 Error Response | { "message": "Some text" } 
 
-<hr>
 <h4>"/auth/login", method:POST.</h4>
 
 Type | JSON 
@@ -80,12 +80,94 @@ Request | { "username": "User Name", "password_hash": "123456789" }
 Response | { "token": "wqewqeqwr123o1kepo2k-c439!(#_$I(#$.@)#@!O)$K@J)!$.!@(#JWJDWADISIADOUI" }
 Error Response | { "message": "Some text" } 
 
-<hr>
 <h4>"/auth/profile/${Username}", method:GET.</h4>
 
-Type | JSON 
---- | ---
-Request | write param to url, example: "/auth/profile/Glebegor"
-Response | { "username": "User name", "email": "email@gmail.com", "telefon": "+3242 3242 432", "position": "Position", "description": "Description text", "subscribe": "Subscribe", "companies": "Companies", "name": "name", "surname": "Surname", "id": "Id" }
-Error Response | { "message": "Some text" } 
+Type | JSON | Headers
+--- | --- | ---
+Request | write param to url, example: "/auth/profile/Glebegor" | Headers
+Response | { "username": "User name", "email": "email@gmail.com", "telefon": "+3242 3242 432", "position": "Position", "description": "Description text", "subscribe": "Subscribe", "companies": "Companies", "name": "name", "surname": "Surname", "id": "Id" } | Headers
+Error Response | { "message": "Some text" } | Headers
 
+<h3>POSTS</h3>
+<hr>
+<h4>"/api/v2/posts/", method:GET.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | --- 
+Response | {data: [{ "title": "Title", "description": "Title", "text": "aqweqweqwesd", "tags": "['asdasd','asdasd','asdasd']", "rating": 1, "id": 2 }... ]}| --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/posts/", method:POST.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | { "title": "Title", "description": "Title", "text": "aqweqweqwesd", "tags": "['asdasd','asdasd','asdasd']", "rating": 1} | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" }| --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/posts/:id", method:GET.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | ---
+Response | { "title": "Title", "description": "Title", "text": "aqweqweqwesd", "tags": "['asdasd','asdasd','asdasd']", "rating": 1}| --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/posts/:id", method:PUT.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | { "title": "Title", "description": "Title", "text": "aqweqweqwesd", "tags": "['asdasd','asdasd','asdasd']", "rating": 1} | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" } | --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/posts/:id", method:DELETE.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" } | --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h3>WORKS</h3>
+<hr>
+<h4>"/api/v2/posts/", method:GET.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | --- 
+Response | { "data": [ { "title": "title", "description": "description", "text": "text", "tags": "['asdasd', 'asdad']", "technologies": "['qweqw', 'qweqe']", "company": "qwec rewqrq", "price": 2, "experienceLevel": "qweq ", "type_of_job": "qwe ", "invites": 0, "rating": 2, "id": 1 } ] }| --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/work/", method:POST.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | { "title": "title", "description": "description", "text": "text", "tags": "['asdasd', 'asdad']", "technologies": "['qweqw', 'qweqe']", "company": "qwec rewqrq", "price": 2, "experienceLevel": "qweq ", "type_of_job": "qwe ", "invites": 0, "rating": 2 } | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" }| --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/work/:id", method:GET.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | ---
+Response | { "title": "title", "description": "description", "text": "text", "tags": "['asdasd', 'asdad']", "technologies": "['qweqw', 'qweqe']", "company": "qwec rewqrq", "price": 2, "experienceLevel": "qweq ", "type_of_job": "qwe ", "invites": 0, "rating": 2 }| --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/work/:id", method:PUT.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | { "title": "title", "description": "description", "text": "text", "tags": "['asdasd', 'asdad']", "technologies": "['qweqw', 'qweqe']", "company": "qwec rewqrq", "price": 2, "experienceLevel": "qweq ", "type_of_job": "qwe "} | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" } | --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/work/:id", method:DELETE.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" } | --- 
+Error Response | { "message": "Some text" } | --- 
