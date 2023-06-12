@@ -66,6 +66,12 @@ func (h *Handler) workPUT(c *gin.Context) {
 	})
 }
 func (h *Handler) workDELETE(c *gin.Context) {
+	id := c.Params.ByName("id")
+	idInt, _ := strconv.Atoi(id)
+	if err := h.service.Work.Delete(idInt); err != nil {
+		newResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"Status": "OK",
 	})

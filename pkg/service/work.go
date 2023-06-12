@@ -29,3 +29,8 @@ func (s *WorkService) Update(id int, input TonWork.WorkUpdate) error {
 	err := s.repo.Update(idStr, input)
 	return err
 }
+func (s *WorkService) Delete(id int) error {
+	idStr := strconv.Itoa(id)
+	err := s.repo.Delete(idStr)
+	return err
+}

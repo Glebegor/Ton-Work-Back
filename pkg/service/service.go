@@ -17,6 +17,7 @@ type Work interface {
 	Create(int, TonWork.Work) error
 	GetById(int) (TonWork.Work, error)
 	Update(int, TonWork.WorkUpdate) error
+	Delete(int) error
 }
 type Posts interface {
 	GetAll() ([]TonWork.Post, error)

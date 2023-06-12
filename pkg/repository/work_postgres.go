@@ -103,3 +103,8 @@ func (r *WorkPostgres) Update(id string, input TonWork.WorkUpdate) error {
 	_, err := r.db.Exec(query, args...)
 	return err
 }
+func (r *WorkPostgres) Delete(id string) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id=$1", Table_works)
+	_, err := r.db.Exec(query, id)
+	return err
+}
