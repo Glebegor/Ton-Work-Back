@@ -60,15 +60,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			{
 				Indentification.POST("buy", h.subscribesBuy)
 				Indentification.POST("cancel", h.subscribesCancel)
-			}
-		}
-		chat := apiV2.Group("/chat")
-		{
-			Indentification := chat.Group("/", h.Indentification)
-			{
-				Indentification.GET("/", h.ChatWebSocket)
-			}
-		}
+			}		
+        }
 	}
 	return router
 }
