@@ -6,12 +6,6 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type Message struct {
-	Content  string `json:"content"`
-	RoomId   string `json:"roomId"`
-	Username string `json:"username"`
-}
-
 type Client struct {
 	Conn     *websocket.Conn
 	Message  chan *Message
@@ -20,7 +14,13 @@ type Client struct {
 	Username string `json:"username"`
 }
 
-func (c *Client) writeMessage() {
+type Message struct {
+	Content  string `json:"content"`
+	RoomId   string `json:"roomId"`
+	Username string `json:"username"`
+}
+
+func (c *Client) WriteMessage() {
 	defer func() {
 		c.Conn.Close()
 	}()
@@ -33,7 +33,7 @@ func (c *Client) writeMessage() {
 		c.Conn.WriteJSON(message)
 	}
 }
-func (c *Client) readMessage(hub *Hub) {
+func (c *Client) ReadMessage(hub *Hub) {
 	defer func() {
 		hub.Unregister <- c
 		c.Conn.Close()

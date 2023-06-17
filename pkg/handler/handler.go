@@ -65,9 +65,10 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		}
 		chat := apiV2.Group("/chat")
 		{
-			noIndentification := chat.Group("/")
+			Indentification := chat.Group("/", h.Indentification)
 			{
-				noIndentification.POST("CreateRoom", h.CreateRoom)
+				Indentification.POST("CreateRoom", h.CreateRoom)
+				Indentification.GET("JoinRoom/:roomId", h.JoinRoom)
 			}
 		}
 	}
