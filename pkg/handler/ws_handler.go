@@ -60,4 +60,9 @@ func (h *Handler) JoinRoom(c *gin.Context) {
 		RoomId:   roomId,
 		Username: username,
 	}
+	h.hub.Register <- cl
+	h.hub.Broadcast <- m
+
+	go cl.writeMessage()
+	cl.readMessage(h.hub)
 }

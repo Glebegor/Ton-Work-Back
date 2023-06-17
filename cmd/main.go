@@ -41,6 +41,7 @@ func main() {
 	hub := TonWork.NewHub()
 	handler := handlers.NewHandler(service, hub)
 	server := new(TonWork.Server)
+	go hub.Run()
 	go func() {
 		err := server.Run(viper.GetString("Port"), handler.InitRoutes())
 		if err != nil {

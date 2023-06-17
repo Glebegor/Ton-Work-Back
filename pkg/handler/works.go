@@ -40,10 +40,15 @@ func (h *Handler) workALLGET(c *gin.Context) {
 }
 func (h *Handler) workGET(c *gin.Context) {
 	id := c.Params.ByName("id")
-	idInt, _ := strconv.Atoi(id)
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		newResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 	data, err := h.service.Work.GetById(idInt)
 	if err != nil {
 		newResponse(c, http.StatusBadGateway, err.Error())
+		return
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"data": data,
