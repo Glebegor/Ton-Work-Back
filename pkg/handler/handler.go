@@ -69,6 +69,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			{
 				Indentification.POST("CreateRoom", h.CreateRoom)
 				Indentification.GET("JoinRoom/:roomId", h.JoinRoom)
+				Indentification.GET("GetRooms", h.GetRooms)
 			}
 		}
 	}
