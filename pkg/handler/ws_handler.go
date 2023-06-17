@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	TonWork "github.com/TonWork/back"
@@ -45,20 +46,21 @@ func (h *Handler) JoinRoom(c *gin.Context) {
 		return
 	}
 	roomId := c.Param("roomId")
-	clientId := c.GetString("userId")
-	username := c.GetString("userUsername")
-
+	clientId, _ := c.Get("userId")
+	username, _ := c.Get("userUsername")
+	clientIdStr := fmt.Sprintf("%v", clientId)
+	usernameStr := fmt.Sprintf("%v", username)
 	cl := &TonWork.Client{
 		Conn:     conn,
 		Message:  make(chan *TonWork.Message, 10),
-		Id:       clientId,
+		Id:       clientIdStr,
 		RoomId:   roomId,
-		Username: username,
+		Username: usernameStr,
 	}
 	m := &TonWork.Message{
 		Content:  "A new user joined the room",
 		RoomId:   roomId,
-		Username: username,
+		Username: usernameStr,
 	}
 	h.hub.Register <- cl
 	h.hub.Broadcast <- m
