@@ -1,17 +1,17 @@
 package TonWork
 
 type Room struct {
-    Id int `json:"id"`
-    Name string `json:"name"`
-    Clients map[string]*Client `json:"clients"`
+	Id      string             `json:"id"`
+	Name    string             `json:"name"`
+	Clients map[string]*Client `json:"clients"`
 }
 
 type Hub struct {
-    Rooms map[string]*Room
+	Rooms map[string]*Room
 }
 
 func NewHub() *Hub {
-    return &Hub{
-        Rooms: make(map[string]*Room),
-    }
+	return &Hub{
+		Rooms: make(map[string]*Room),
+	}
 }

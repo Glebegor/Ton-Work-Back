@@ -38,7 +38,8 @@ func main() {
 	}
 	repository := repositoryes.NewRepository(db)
 	service := services.NewService(repository)
-	handler := handlers.NewHandler(service)
+	hub := TonWork.NewHub()
+	handler := handlers.NewHandler(service, hub)
 	server := new(TonWork.Server)
 	go func() {
 		err := server.Run(viper.GetString("Port"), handler.InitRoutes())

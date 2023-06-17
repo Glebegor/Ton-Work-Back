@@ -1,16 +1,18 @@
 package handler
 
 import (
+	TonWork "github.com/TonWork/back"
 	service "github.com/TonWork/back/pkg/service"
 	gin "github.com/gin-gonic/gin"
 )
 
 type Handler struct {
 	service *service.Service
+	hub     *TonWork.Hub
 }
 
-func NewHandler(services *service.Service) *Handler {
-	return &Handler{service: services}
+func NewHandler(services *service.Service, hub *TonWork.Hub) *Handler {
+	return &Handler{service: services, hub: hub}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
@@ -37,7 +39,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				Indentification.PUT(":id", h.workPUT)
 				Indentification.DELETE(":id", h.workDELETE)
 			}
-
 		}
 
 		posts := apiV2.Group("/posts")
@@ -60,8 +61,15 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			{
 				Indentification.POST("buy", h.subscribesBuy)
 				Indentification.POST("cancel", h.subscribesCancel)
-			}		
-        }
+			}
+		}
+		chat := apiV2.Group("/chat")
+		{
+			noIndentification := chat.Group("/")
+			{
+				noIndentification.POST("CreateRoom", h.CreateRoom)
+			}
+		}
 	}
 	return router
 }
