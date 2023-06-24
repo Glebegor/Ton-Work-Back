@@ -27,6 +27,7 @@ type Posts interface {
 	Delete(int) error
 }
 type Subscribes interface {
+	BuySubscribe(int) error
 }
 
 type Service struct {
@@ -41,6 +42,6 @@ func NewService(repos *repository.Repository) *Service {
 		Authorization: NewAuthService(repos.Authorization),
 		Work:          NewWorkService(repos.Work),
 		Posts:         NewPostService(repos.Post),
-		Subscribes:    nil,
+		Subscribes:    NewSubscribesService(repos.Subscribes),
 	}
 }

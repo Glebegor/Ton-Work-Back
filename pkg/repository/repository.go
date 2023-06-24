@@ -25,6 +25,7 @@ type Post interface {
 	Delete(string) error
 }
 type Subscribes interface {
+	BuySubscribe(int) error
 }
 type Repository struct {
 	Authorization
@@ -38,6 +39,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Authorization: NewAuthPostgres(db),
 		Work:          NewWorkPostgres(db),
 		Post:          NewPostPostgres(db),
-		Subscribes:    nil,
+		Subscribes:    NewSubscribesPostgres(db),
 	}
 }
