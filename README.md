@@ -198,14 +198,51 @@ Error Response | { "message": "Some text" } | ---
 <h3>SUBSCRIBES</h3>
 <hr>
 <h4>"/api/v2/subscribe/buy", method:POST.</h4>
+
 Type | JSON | Headers 
 --- | --- | --- 
 Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
 Response | { "Status": "OK" } | --- 
 Error Response | { "message": "Some text" } | --- 
+{ "name":"qweqwe", "id":"qweqew" }
 <h4>"/api/v2/subscribe/cancel", method:POST.</h4>
+
 Type | JSON | Headers 
 --- | --- | --- 
 Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
 Response | { "Status": "OK" } | --- 
 Error Response | { "message": "Some text" } | --- 
+
+<h3>CHAT</h3>
+<hr>
+<h4>"/api/v2/chat/CreateRoom", method:POST</h4>
+
+Type | JSON | Headers
+--- | --- | ---
+Request | { "name":"qweqwe", "id":"qweqew" } |  Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a"
+Response | { "name":"qweqwe", "id":"qweqew" } | ---
+Error Response | { "message": "Some text" } | ---
+
+<h4>"/api/v2/chat/JoinRoom/:roomId", method:WEBSOCKET</h4>
+
+Type | JSON | Headers
+--- | --- | ---
+Request | --- |  Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a"
+Response | { --- } | ---
+Error Response | { "message": "Some text" } | ---
+
+<h4>"/api/v2/chat/GetRooms", method:GET</h4>
+
+Type | JSON | Headers
+--- | --- | ---
+Request | --- |  Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a"
+Response | [ { "id": "room1", "name": "room1" }...] | ---
+Error Response | { "message": "Some text" } | ---
+
+<h4>"/api/v2/chat/GetClients/:roomId", method:GET</h4>
+
+Type | JSON | Headers
+--- | --- | ---
+Request | --- |  Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a"
+Response | [ { "id": "3", "username":"username" }...] | ---
+Error Response | { "message": "Some text" } | ---
