@@ -2,6 +2,19 @@
 TonWork that's platform/marketplace where you can find work, team, and interesting project that rooted with IT(and not also).
 If you need team, you will can create a find order on, for example, data sciences developer or another. 
 And you can pay for work by crypto currency(in our plan start from TON coint and move to another SOL, ETH, BTC...).
+<h3>Start project</h3>
+<h4>1-Start database:</h4>
+You need to download a docker image(postgres).<br>
+And after create database:<br>
+<code>docker run --name=name-of-database -e POSTGRES_PASSWORD="password" -p 5436:5432 -d --rm postgres</code>
+<h4>2-Create migrations:</h4>
+<code>migrate -path ./schema -database "postgres://postgres:password@localhost:5436/postgres?sslmode=disable" up</code>
+<h4>3-Create .env file:</h4>
+DB_PASSWORD='password'<br>
+Secret_Key='SECRET-KEY'
+<h4>4-Run project:</h4>
+<code>go run cmd/main.go</code>
+
 
 <h3>Work with API</h3>
 
@@ -25,33 +38,43 @@ And you can pay for work by crypto currency(in our plan start from TON coint and
       - "/subscribe":
           - "/buy"    POST
           - "/cancel" POST
+      - "/chat":
+          - "/CreateRoom" POST
+          - "/GetRooms" GET
+          - "/JoinRoom/:roomId" WebSocket
+          - "/GetClients/:roomId" Get
          
-<h4>Or you can see it in this format(where it is made there is a "+"):</h4><br>
+<h4>Or you can see it in this format(Handler is realizated if has "+" on the right side):</h4><br>
 "/auth":<br>
-"/auth/register"           POST+<br>
-"/auth/login"              POST+<br>
-"/auth/profile"            GET+<br>
+"/auth/register"                  POST+<br>
+"/auth/login"                     POST+<br>
+"/auth/profile"                   GET+<br>
 <br>
 "/api/v2/":<br>
 <br>
 "/api/v2/work":<br>
-"/api/v2/work/"            POST+<br>
-"/api/v2/work/"            GET+<br>
-"/api/v2/work/:id"         GET+<br>
-"/api/v2/work/:id"         PATCH+<br>
-"/api/v2/work/:id"         DELETE+<br>
+"/api/v2/work/"                   POST+<br>
+"/api/v2/work/"                   GET+<br>
+"/api/v2/work/:id"                GET+<br>
+"/api/v2/work/:id"                PATCH+<br>
+"/api/v2/work/:id"                DELETE+<br>
 <br>
 "/api/v2/posts":<br>
-"/api/v2/posts/"           POST+<br>
-"/api/v2/posts/"           GET+<br>
-"/api/v2/posts/:id"        GET+<br>
-"/api/v2/posts/:id"        PATCH+<br>
-"/api/v2/posts/:id"        DELETE+<br>
+"/api/v2/posts/"                  POST+<br>
+"/api/v2/posts/"                  GET+<br>
+"/api/v2/posts/:id"               GET+<br>
+"/api/v2/posts/:id"               PATCH+<br>
+"/api/v2/posts/:id"               DELETE+<br>
 <br>
 "/api/v2/subscribe":<br>
-"/api/v2/subscribe/buy"    POST<br>
-"/api/v2/subscribe/cancel" POST<br>
-
+"/api/v2/subscribe/buy"           POST<br>
+"/api/v2/subscribe/cancel"        POST<br>
+<br>
+"/api/v2/chat:<br>
+"/api/v2/chat/CreateRoom"         POST+<br>
+"/api/v2/chat/GetRooms"           GET+<br>
+"/api/v2/chat/JoinRoom/:roomId"   WebSocket+<br>
+"/api/v2/chat/GetClients/:roomId" GET+<br>
 <h3>JWT token and his structure</h3>
 <hr>
 JWT token looks like this:

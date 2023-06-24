@@ -7,4 +7,3 @@ db:
   DBName: 'postgres'
   SSLMode: "disable"
   Username: 'postgres'
-  Password: '123321'
