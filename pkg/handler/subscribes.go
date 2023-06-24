@@ -36,3 +36,8 @@ func (h *Handler) subscribesCancel(c *gin.Context) {
 		"Status": "Ok",
 	})
 }
+
+func (h *Handler) ChangeSubscribeTime() error {
+	err := h.service.Subscribes.ChangeSubscribeTime()
+	return err
+}

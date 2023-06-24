@@ -29,6 +29,7 @@ type Posts interface {
 type Subscribes interface {
 	BuySubscribe(int) error
 	CancelSubscribe(int) error
+	ChangeSubscribeTime() error
 }
 
 type Service struct {

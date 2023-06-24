@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	TonWork "github.com/TonWork/back"
 	handlers "github.com/TonWork/back/pkg/handler"
@@ -42,6 +43,13 @@ func main() {
 	handler := handlers.NewHandler(service, hub)
 	server := new(TonWork.Server)
 	go hub.Run()
+	go func() {
+		err := handler.ChangeSubscribeTime()
+		if err != nil {
+			logrus.Fatalf("Error while changed subscribes: %s", err.Error())
+		}
+		time.Sleep(time.Minute * 1)
+	}()
 	go func() {
 		err := server.Run(viper.GetString("Port"), handler.InitRoutes())
 		if err != nil {
