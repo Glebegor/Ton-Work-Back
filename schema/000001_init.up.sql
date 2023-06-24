@@ -11,11 +11,6 @@ CREATE TABLE users (
     Surname varchar,
     id serial not null unique
 );
-CREATE TABLE user_sub (
-    time_in_hours_to_end int,
-    id_user int references users(id) on delete cascade not null,
-    id serial not null unique
-);
 CREATE TABLE works (
     title varchar(255),
 	description varchar(255),
@@ -47,4 +42,9 @@ CREATE TABLE users_to_posts (
     id serial not null unique,
     id_user int references users(id) on delete cascade not null,
     id_posts int references posts(id) on delete cascade not null
+);
+CREATE TABLE user_sub (
+    time_in_hours_to_end int,
+    id_user int references users(id) on delete cascade not null,
+    id serial not null unique
 );

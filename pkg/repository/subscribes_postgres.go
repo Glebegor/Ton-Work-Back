@@ -25,8 +25,8 @@ func (r *SubscribesPostgres) CancelSubscribe(id int) error {
 }
 
 func (r *SubscribesPostgres) ChangeSubscribeTime() error {
-	query := fmt.Sprintf("UPDATE %s SET time_in_hours_to_end=time_in_hours_to_end-1 WHERE time_in_hours_to_end<>-1, subscribe='premium'", Table_users)
-	query2 := fmt.Sprintf("UPDATE %s SET subscribe='free' WHERE time_in_hours_to_end<=-1", Table_users)
+	query := fmt.Sprintf("UPDATE %s tl SET time_in_hours_to_end=time_in_hours_to_end-1 FROM %s ul WHERE tl.time_in_hours_to_end<>-1 AND ul.subscribe='premium'", Table_user_sub, Table_users)
+	query2 := fmt.Sprintf("UPDATE %s tl SET subscribe='free' FROM %s ul WHERE ul.time_in_hours_to_end<=-1", Table_users, Table_user_sub)
 	_, err := r.db.Exec(query)
 	if err != nil {
 		return err

@@ -16,13 +16,24 @@ func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 }
 
 func (r *AuthPostgres) CreateUser(user TonWork.User) error {
-	var id int
-	query := fmt.Sprintf("INSERT INTO %s (username, password_hash, email, subscribe, telefon, position, description, companies, name, surname) VALUES ($1,$2,$3,'free','-','-','-','-','-','-') RETURNING id", Table_users)
-	row := r.db.QueryRow(query, user.Username, user.Password_hash, user.Email)
-	if err := row.Scan(&id); err != nil {
+	tx, err := r.db.Begin()
+	if err != nil {
 		return err
 	}
-	return nil
+	var id int
+	query := fmt.Sprintf("INSERT INTO %s (username, password_hash, email, subscribe, telefon, position, description, companies, name, surname) VALUES ($1,$2,$3,'free','-','-','-','-','-','-') RETURNING id", Table_users)
+	row := tx.QueryRow(query, user.Username, user.Password_hash, user.Email)
+	if err := row.Scan(&id); err != nil {
+		tx.Rollback()
+		return err
+	}
+	query2 := fmt.Sprintf("INSERT INTO %s (id_user, time_in_hours_to_end) VALUES ($1, $2)", Table_user_sub)
+	_, err = tx.Exec(query2, id, -1)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	return tx.Commit()
 }
 func (r *AuthPostgres) GetUser(username, password string) (TonWork.User, error) {
 	var user TonWork.User
