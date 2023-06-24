@@ -67,8 +67,8 @@ Secret_Key='SECRET-KEY'
 "/api/v2/posts/:id"               DELETE+<br>
 <br>
 "/api/v2/subscribe":<br>
-"/api/v2/subscribe/buy"           POST<br>
-"/api/v2/subscribe/cancel"        POST<br>
+"/api/v2/subscribe/buy"           POST+<br>
+"/api/v2/subscribe/cancel"        POST+<br>
 <br>
 "/api/v2/chat:<br>
 "/api/v2/chat/CreateRoom"         POST+<br>
@@ -189,6 +189,21 @@ Error Response | { "message": "Some text" } | ---
 
 <h4>"/api/v2/work/:id", method:DELETE.</h4>
 
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" } | --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h3>SUBSCRIBES</h3>
+<hr>
+<h4>"/api/v2/subscribe/buy", method:POST.</h4>
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "Status": "OK" } | --- 
+Error Response | { "message": "Some text" } | --- 
+<h4>"/api/v2/subscribe/cancel", method:POST.</h4>
 Type | JSON | Headers 
 --- | --- | --- 
 Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
