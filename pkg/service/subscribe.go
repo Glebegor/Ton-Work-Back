@@ -14,7 +14,7 @@ func (s *SubscribesService) BuySubscribe(id int) error {
 	return err
 }
 func (s *SubscribesService) CancelSubscribe(id int) error {
-	err := s.repos.BuySubscribe(id)
+	err := s.repos.CancelSubscribe(id)
 	return err
 }
 func (s *SubscribesService) ChangeSubscribeTime() error {
