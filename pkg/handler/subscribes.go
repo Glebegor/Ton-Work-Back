@@ -38,7 +38,7 @@ func (h *Handler) subscribesCancel(c *gin.Context) {
 }
 func (h *Handler) subscribesTimetoend(c *gin.Context) {
 	name := c.GetString("userUsername")
-	id := c.GetString("userId")
+	id := c.GetInt("userId")
 	timetoend, err := h.service.Subscribes.GetTimeToEnd(id)
 	if err != nil {
 		newResponse(c, http.StatusBadGateway, err.Error())
@@ -48,9 +48,4 @@ func (h *Handler) subscribesTimetoend(c *gin.Context) {
 		"Username":  name,
 		"TimeToEnd": timetoend,
 	})
-}
-
-func (h *Handler) ChangeSubscribeTime() error {
-	err := h.service.Subscribes.ChangeSubscribeTime()
-	return err
 }

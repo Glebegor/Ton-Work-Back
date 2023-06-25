@@ -70,7 +70,7 @@ Secret_Key='SECRET-KEY'
 "/api/v2/subscribe":<br>
 "/api/v2/subscribe/buy"           POST+<br>
 "/api/v2/subscribe/cancel"        POST+<br>
-"/api/v2/subscribe/timetoend"     GET<br>
+"/api/v2/subscribe/timetoend"     GET+<br>
 <br>
 "/api/v2/chat:<br>
 "/api/v2/chat/CreateRoom"         POST+<br>
@@ -213,6 +213,14 @@ Type | JSON | Headers
 --- | --- | --- 
 Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
 Response | { "Status": "OK" } | --- 
+Error Response | { "message": "Some text" } | --- 
+
+<h4>"/api/v2/subscribe/timetoend", method:GET.</h4>
+
+Type | JSON | Headers 
+--- | --- | --- 
+Request | --- | Authorization: "Bearer tokenqw.qweqweqe.qwesaid0@OI#U!sf09a" 
+Response | { "TimeToEnd": -1, "Username": "username"} | --- 
 Error Response | { "message": "Some text" } | --- 
 
 <h3>CHAT</h3>
