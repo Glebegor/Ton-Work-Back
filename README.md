@@ -38,6 +38,7 @@ Secret_Key='SECRET-KEY'
       - "/subscribe":
           - "/buy"    POST
           - "/cancel" POST
+          - "/timetoend" GET
       - "/chat":
           - "/CreateRoom" POST
           - "/GetRooms" GET
@@ -69,6 +70,7 @@ Secret_Key='SECRET-KEY'
 "/api/v2/subscribe":<br>
 "/api/v2/subscribe/buy"           POST+<br>
 "/api/v2/subscribe/cancel"        POST+<br>
+"/api/v2/subscribe/timetoend"     GET<br>
 <br>
 "/api/v2/chat:<br>
 "/api/v2/chat/CreateRoom"         POST+<br>
