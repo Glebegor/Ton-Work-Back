@@ -61,6 +61,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			{
 				Indentification.POST("buy", h.subscribesBuy)
 				Indentification.POST("cancel", h.subscribesCancel)
+				Indentification.GET("timetoend", h.subscribesTimetoend)
 			}
 		}
 		chat := apiV2.Group("/chat")

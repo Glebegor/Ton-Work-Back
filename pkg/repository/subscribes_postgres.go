@@ -9,6 +9,11 @@ import (
 type SubscribesPostgres struct {
 	db *sqlx.DB
 }
+type SubTime struct {
+	Time_in_hours_to_end int `json:"time_in_hours_to_end"`
+	UserId               int `json:"userId"`
+	Id                   int `json:"id"`
+}
 
 func NewSubscribesPostgres(db *sqlx.DB) *SubscribesPostgres {
 	return &SubscribesPostgres{db: db}
@@ -22,6 +27,12 @@ func (r *SubscribesPostgres) CancelSubscribe(id int) error {
 	query := fmt.Sprintf("UPDATE %s SET subscribe='free' WHERE id=$1", Table_users)
 	_, err := r.db.Exec(query, id)
 	return err
+}
+func (r *SubscribesPostgres) GetTimeToEnd(id int) (int, error) {
+	var SubTimeInfo SubTime
+	query := fmt.Sprintf("SELECT * FROM %s WHERE user_id=$1", Table_user_sub)
+	err := r.db.Select(&SubTimeInfo, query, id)
+	return SubTimeInfo.Time_in_hours_to_end, err
 }
 
 func (r *SubscribesPostgres) ChangeSubscribeTime() error {

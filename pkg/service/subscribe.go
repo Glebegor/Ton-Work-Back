@@ -21,3 +21,7 @@ func (s *SubscribesService) ChangeSubscribeTime() error {
 	err := s.repos.ChangeSubscribeTime()
 	return err
 }
+func (s *SubscribesService) GetTimeToEnd(id int) (int, error) {
+	timetoend, err := s.repos.GetTimeToEnd(id)
+	return timetoend, err
+}

@@ -28,6 +28,7 @@ type Subscribes interface {
 	BuySubscribe(int) error
 	CancelSubscribe(int) error
 	ChangeSubscribeTime() error
+	GetTimeToEnd(int) (int, error)
 }
 type Repository struct {
 	Authorization
