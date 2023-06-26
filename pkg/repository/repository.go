@@ -27,7 +27,7 @@ type Post interface {
 type Subscribes interface {
 	BuySubscribe(int) error
 	CancelSubscribe(int) error
-	ChangeSubscribeTime()
+	UpdateTimeOfSub() error
 	GetTimeToEnd(int) (int, error)
 }
 type Repository struct {

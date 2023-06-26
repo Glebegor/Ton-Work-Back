@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	TonWork "github.com/TonWork/back"
 	handlers "github.com/TonWork/back/pkg/handler"
@@ -42,9 +44,17 @@ func main() {
 	handler := handlers.NewHandler(service, hub)
 	server := new(TonWork.Server)
 
-	go hub.Run()
+	go func() {
+		for {
+			if err := repository.Subscribes.UpdateTimeOfSub(); err != nil {
+				logrus.Fatalf("Error while was updating sub time: %s", err.Error())
+			}
+			fmt.Printf("--Updated time of sub: %s--", time.Now())
+			time.Sleep(time.Hour * 24)
+		}
+	}()
 
-	go repository.Subscribes.ChangeSubscribeTime()
+	go hub.Run()
 
 	go func() {
 		err := server.Run(viper.GetString("Port"), handler.InitRoutes())
