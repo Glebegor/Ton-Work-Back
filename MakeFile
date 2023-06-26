@@ -1,0 +1,6 @@
+installdb:
+	docker pull postgres
+build:
+	docker run --name=ton-work -e POSTGRES_PASSWORD='123321' -p 5436:5432 -d --rm postgres
+run:
+	go run cmd/main.go
