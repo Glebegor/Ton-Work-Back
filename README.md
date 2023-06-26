@@ -21,10 +21,10 @@ This command will install docker image to your computer.<br>
 <code>docker pull postgres</code>
 <h4>build:</h4>
 This command will run docker database(PostgresSQL). <br>
-<code>docker run --name=ton-work -e POSTGRES_PASSWORD='123321' -p 5436:5432 -d --rm postgres</code>
+<code>docker run --name=name-of-database -e POSTGRES_PASSWORD='password' -p 5436:5432 -d --rm postgres</code>
 <h4>migrate:</h4>
 This command will create migrations for your database.<br>
-<code>migrate -path ./schema -database "postgres://postgres:123321@localhost:5436/postgres?sslmode=disable" up</code>
+<code>migrate -path ./schema -database "postgres://postgres:password@localhost:5436/postgres?sslmode=disable" up</code>
 <h4>run:</h4>
 This command will run project.<br>
 <code>go run cmd/main.go</code>
@@ -36,6 +36,7 @@ This command will run project.<br>
       - "/register"   POST
       - "/login"      POST
       - "/profile"    GET
+      - "/updateProfile"    PUT
 2. "/api/v2/":
       - "/work":
           - "/"       POST
@@ -61,6 +62,7 @@ This command will run project.<br>
          
 <h4>Or you can see it in this format(Handler is realizated if has "+" on the right side):</h4><br>
 "/auth":<br>
+"/auth/updateProfile"             PUT<br>
 "/auth/register"                  POST+<br>
 "/auth/login"                     POST+<br>
 "/auth/profile"                   GET+<br>
