@@ -2,7 +2,8 @@
 TonWork that's platform/marketplace where you can find work, team, and interesting project that rooted with IT(and not also).
 If you need team, you will can create a find order on, for example, data sciences developer or another. 
 And you can pay for work by crypto currency(in our plan start from TON coint and move to another SOL, ETH, BTC...).
-<h3>Start project</h3>
+
+<h3>Start project by cmd</h3>
 <h4>1-Start database:</h4>
 You need to download a docker image(postgres).<br>
 And after create database:<br>
@@ -13,6 +14,21 @@ And after create database:<br>
 DB_PASSWORD='password'<br>
 Secret_Key='SECRET-KEY'
 <h4>4-Run project:</h4>
+
+<h3>Run project by Makefile:</h3>
+<h4>installdb:</h4>
+This command will install docker image to your computer.<br>
+<code>docker pull postgres</code>
+<h4>build:</h4>
+This command will run docker database(PostgresSQL). <br>
+<code>docker run --name=ton-work -e POSTGRES_PASSWORD='123321' -p 5436:5432 -d --rm postgres</code>
+<h4>migrate:</h4>
+This command will create migrations for your database.<br>
+<code>migrate -path ./schema -database "postgres://postgres:123321@localhost:5436/postgres?sslmode=disable" up</code>
+<h4>run:</h4>
+This command will run project.<br>
+<code>go run cmd/main.go</code>
+
 <code>go run cmd/main.go</code>
 
 
