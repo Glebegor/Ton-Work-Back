@@ -29,8 +29,6 @@ This command will create migrations for your database.<br>
 This command will run project.<br>
 <code>go run cmd/main.go</code>
 
-<code>go run cmd/main.go</code>
-
 
 <h3>Work with API</h3>
 
