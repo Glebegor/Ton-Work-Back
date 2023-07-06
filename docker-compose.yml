@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  tonwork-back:
+    build: ./
+    command: ./wait-for-postgres.sh db ./
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DB_PASSWORD=123321
+
+  db:
+    restart: always
+    image: postgres:latest
+    volumes:
+    - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=123321
+    ports:
+      - 5436:5432
