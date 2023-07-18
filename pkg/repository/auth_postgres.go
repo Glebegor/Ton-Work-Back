@@ -1,17 +1,17 @@
 package repository
 
 import (
+	"database/sql"
 	"fmt"
 
 	TonWork "github.com/TonWork/back"
-	"github.com/jmoiron/sqlx"
 )
 
 type AuthPostgres struct {
-	db *sqlx.DB
+	db *sql.DB
 }
 
-func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
+func NewAuthPostgres(db *sql.DB) *AuthPostgres {
 	return &AuthPostgres{db: db}
 }
 
@@ -38,12 +38,12 @@ func (r *AuthPostgres) CreateUser(user TonWork.User) error {
 func (r *AuthPostgres) GetUser(username, password string) (TonWork.User, error) {
 	var user TonWork.User
 	query := fmt.Sprintf("SELECT * FROM %s WHERE username=$1 AND password_hash=$2", Table_users)
-	err := r.db.Get(&user, query, username, password)
+	err := r.db.QueryRow(query, username, password).Scan(&user)
 	return user, err
 }
 func (r *AuthPostgres) GetUserPorfile(username string) (TonWork.User, error) {
 	var user TonWork.User
 	query := fmt.Sprintf("SELECT * FROM %s WHERE username=$1", Table_users)
-	err := r.db.Get(&user, query, username)
+	err := r.db.QueryRow(query, username).Scan(&user)
 	return user, err
 }

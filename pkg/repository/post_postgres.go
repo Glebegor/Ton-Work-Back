@@ -1,25 +1,25 @@
 package repository
 
 import (
+	"database/sql"
 	"fmt"
 	"strings"
 
 	TonWork "github.com/TonWork/back"
-	"github.com/jmoiron/sqlx"
 )
 
 type PostPostgres struct {
-	db *sqlx.DB
+	db *sql.DB
 }
 
-func NewPostPostgres(db *sqlx.DB) *PostPostgres {
+func NewPostPostgres(db *sql.DB) *PostPostgres {
 	return &PostPostgres{db: db}
 }
 func (r *PostPostgres) GetAll() ([]TonWork.Post, error) {
 	var data []TonWork.Post
 	query := fmt.Sprintf("SELECT * FROM %s", Table_posts)
 
-	err := r.db.Select(&data, query)
+	err := r.db.QueryRow(query).Scan(&data)
 	return data, err
 }
 func (r *PostPostgres) Create(userId int, data TonWork.Post) error {
@@ -45,7 +45,7 @@ func (r *PostPostgres) Create(userId int, data TonWork.Post) error {
 func (r *PostPostgres) GetById(id int) (TonWork.Post, error) {
 	var data TonWork.Post
 	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1", Table_posts)
-	err := r.db.Get(&data, query, id)
+	err := r.db.QueryRow(query, id).Scan(&data)
 	return data, err
 }
 func (r *PostPostgres) Update(id string, input TonWork.PostUpdate) error {

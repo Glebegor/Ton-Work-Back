@@ -1,9 +1,8 @@
 package repository
 
 import (
+	"database/sql"
 	"fmt"
-
-	sqlx "github.com/jmoiron/sqlx"
 )
 
 const (
@@ -16,16 +15,16 @@ const (
 )
 
 type ConfigDB struct {
-	Host     string
-	Port     string
-	DBName   string
-	SSLMode  string
-	Username string
+	Server   string
+	User     string
 	Password string
+	Port     string
+	Database string
 }
 
-func ConnectDB(cfg ConfigDB) (*sqlx.DB, error) {
-	db, err := sqlx.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s", cfg.Host, cfg.Port, cfg.Username, cfg.DBName, cfg.Password, cfg.SSLMode))
+func ConnectDB(cfg ConfigDB) (*sql.DB, error) {
+	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%s;database=%s;", cfg.Server, cfg.User, cfg.Password, cfg.Port, cfg.Database)
+	db, err := sql.Open("sqlserver", connString)
 	if err != nil {
 		return nil, err
 	}

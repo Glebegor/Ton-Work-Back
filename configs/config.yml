@@ -2,8 +2,7 @@ Port: "8000"
 Host: "localhost"
 
 db:
-  Host: 'localhost'
-  Port: '5436'
-  DBName: 'postgres'
-  SSLMode: "disable"
-  Username: 'postgres'
+  Server: 'glebegor.database.windows.net'
+  Port: 1433
+  DBName: 'tonworkdbs'
+  Username: 'admindb'

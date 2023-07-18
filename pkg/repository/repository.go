@@ -1,8 +1,9 @@
 package repository
 
 import (
+	"database/sql"
+
 	TonWork "github.com/TonWork/back"
-	sqlx "github.com/jmoiron/sqlx"
 )
 
 type Authorization interface {
@@ -37,7 +38,7 @@ type Repository struct {
 	Subscribes
 }
 
-func NewRepository(db *sqlx.DB) *Repository {
+func NewRepository(db *sql.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
 		Work:          NewWorkPostgres(db),

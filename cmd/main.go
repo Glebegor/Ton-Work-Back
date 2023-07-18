@@ -15,7 +15,7 @@ import (
 	logrus "github.com/sirupsen/logrus"
 	viper "github.com/spf13/viper"
 
-	_ "github.com/lib/pq"
+	_ "github.com/microsoft/go-mssqldb"
 )
 
 func main() {
@@ -28,11 +28,10 @@ func main() {
 		logrus.Fatalf("Error while loading env variables: %s", err.Error())
 	}
 	db, err := repositoryes.ConnectDB(repositoryes.ConfigDB{
-		Host:     viper.GetString("db.Host"),
+		Server:   viper.GetString("db.Server"),
 		Port:     viper.GetString("db.Port"),
-		DBName:   viper.GetString("db.DBName"),
-		SSLMode:  viper.GetString("db.SSLMode"),
-		Username: viper.GetString("db.Username"),
+		Database: viper.GetString("db.DBName"),
+		User:     viper.GetString("db.Username"),
 		Password: os.Getenv("DB_PASSWORD"),
 	})
 	if err != nil {

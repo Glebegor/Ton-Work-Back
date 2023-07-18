@@ -1,13 +1,12 @@
 package repository
 
 import (
+	"database/sql"
 	"fmt"
-
-	"github.com/jmoiron/sqlx"
 )
 
 type SubscribesPostgres struct {
-	db *sqlx.DB
+	db *sql.DB
 }
 type SubTime struct {
 	Time_in_hours_to_end int `json:"time_in_hours_to_end" db:"time_in_hours_to_end"`
@@ -15,7 +14,7 @@ type SubTime struct {
 	Id                   int `json:"id" db:"id"`
 }
 
-func NewSubscribesPostgres(db *sqlx.DB) *SubscribesPostgres {
+func NewSubscribesPostgres(db *sql.DB) *SubscribesPostgres {
 	return &SubscribesPostgres{db: db}
 }
 func (r *SubscribesPostgres) BuySubscribe(id int) error {
@@ -41,7 +40,7 @@ func (r *SubscribesPostgres) CancelSubscribe(id int) error {
 func (r *SubscribesPostgres) GetTimeToEnd(id int) (int, error) {
 	var SubTimeInfo SubTime
 	query := fmt.Sprintf("SELECT * FROM %s WHERE id_user=$1", Table_user_sub)
-	err := r.db.Get(&SubTimeInfo, query, id)
+	err := r.db.QueryRow(query, id).Scan(&SubTimeInfo)
 	return SubTimeInfo.Time_in_hours_to_end, err
 }
 func (r *SubscribesPostgres) UpdateTimeOfSub() error {
@@ -50,8 +49,8 @@ func (r *SubscribesPostgres) UpdateTimeOfSub() error {
 		return err
 	}
 
-	query := fmt.Sprintf("UPDATE %s tl SET time_in_hours_to_end=time_in_hours_to_end-1 FROM %s ul WHERE tl.time_in_hours_to_end<>-1 AND ul.subscribe='premium'", "user_sub", "users")
-	query2 := fmt.Sprintf("UPDATE %s tl SET subscribe='free' FROM %s ul WHERE ul.time_in_hours_to_end<=-1", "users", "user_sub")
+	query := fmt.Sprintf("UPDATE tl SET tl.time_in_hours_to_end=tl.time_in_hours_to_end-1 FROM %s tl JOIN %s ul ON tl.id_user = ul.id WHERE tl.time_in_hours_to_end<>-1 AND ul.subscribe='premium'", Table_user_sub, Table_users)
+	query2 := fmt.Sprintf("UPDATE tl SET subscribe=SUBSTRING('free', 1, 255) FROM %s tl JOIN %s ul ON tl.id=ul.id_user WHERE ul.time_in_hours_to_end<=-1", Table_users, Table_user_sub)
 
 	_, err = tx.Exec(query)
 	if err != nil {
