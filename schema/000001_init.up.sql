@@ -1,15 +1,15 @@
 CREATE TABLE users (
     id INT IDENTITY(1,1) PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(2000) NOT NULL,
     email VARCHAR(255) NOT NULL,
     telefon VARCHAR(255),
     position VARCHAR(255),
     description VARCHAR(2000),
     subscribe VARCHAR(255) NOT NULL,
     companies VARCHAR(255),
-    Name VARCHAR(255),
-    Surname VARCHAR(255)
+    name VARCHAR(255),
+    surname VARCHAR(255)
 );
 
 CREATE TABLE works (
