@@ -35,7 +35,7 @@ This command will run project.<br>
 1. "/auth":
       - "/register"   POST
       - "/login"      POST
-      - "/profile"    GET
+      - "/profile/:username"    GET
       - "/updateProfile"    PUT
 2. "/api/v2/":
       - "/work":
