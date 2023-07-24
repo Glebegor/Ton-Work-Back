@@ -29,7 +29,7 @@ func main() {
 	}
 	db, err := repositoryes.ConnectDB(repositoryes.ConfigDB{
 		Server:   viper.GetString("db.Server"),
-		Port:     os.Getenv("PORT"),
+		Port:     viper.GetString("db.Port"),
 		Database: viper.GetString("db.DBName"),
 		User:     viper.GetString("db.Username"),
 		Password: os.Getenv("DB_PASSWORD"),
@@ -62,7 +62,7 @@ func main() {
 		}
 	}()
 
-	logrus.Printf("Server is loading on port %s.", viper.GetString("Port"))
+	logrus.Printf("Server is loading on port %s.", os.Getenv("PORT"))
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
