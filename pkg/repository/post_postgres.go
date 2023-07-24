@@ -19,7 +19,21 @@ func (r *PostPostgres) GetAll() ([]TonWork.Post, error) {
 	var data []TonWork.Post
 	query := fmt.Sprintf("SELECT * FROM %s", Table_posts)
 
-	err := r.db.QueryRow(query).Scan(&data)
+	row, err := r.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	for row.Next() {
+		var post TonWork.Post
+		err := row.Scan(&post.Id, &post.Title, &post.Description, &post.Text, &post.Tags, &post.Rating)
+		if err != nil {
+			return nil, err
+		}
+		data = append(data, post)
+	}
+	if err := row.Err(); err != nil {
+		return nil, err
+	}
 	return data, err
 }
 func (r *PostPostgres) Create(userId int, data TonWork.Post) error {
@@ -28,14 +42,14 @@ func (r *PostPostgres) Create(userId int, data TonWork.Post) error {
 		return err
 	}
 	var id int
-	createPostQuery := fmt.Sprintf("INSERT INTO %s (title, description, text, tags, rating) VALUES ($1, $2, $3, $4, $5) RETURNING id", Table_posts)
-	row := tx.QueryRow(createPostQuery, data.Title, data.Description, data.Text, data.Tags, data.Rating)
+	createPostQuery := fmt.Sprintf("INSERT INTO %s (title, description, text, tags, rating) OUTPUT inserted.id VALUES (@Title, @Description, @Text, @Tags, @Rationg)", Table_posts)
+	row := tx.QueryRow(createPostQuery, sql.Named("Title", data.Title), sql.Named("Description", data.Description), sql.Named("Text", data.Text), sql.Named("Tags", data.Tags), sql.Named("Rationg", data.Rating))
 	if err := row.Scan(&id); err != nil {
 		tx.Rollback()
 		return err
 	}
-	createPostUserQuery := fmt.Sprintf("INSERT INTO %s (id_user, id_posts) VALUES ($1, $2)", Table_users_to_posts)
-	_, err = tx.Exec(createPostUserQuery, userId, id)
+	createPostUserQuery := fmt.Sprintf("INSERT INTO %s (id_user, id_posts) VALUES (@UserId, @Id)", Table_users_to_posts)
+	_, err = tx.Exec(createPostUserQuery, sql.Named("UserId", userId), sql.Named("Id", id))
 	if err != nil {
 		tx.Rollback()
 		return err
@@ -44,8 +58,8 @@ func (r *PostPostgres) Create(userId int, data TonWork.Post) error {
 }
 func (r *PostPostgres) GetById(id int) (TonWork.Post, error) {
 	var data TonWork.Post
-	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1", Table_posts)
-	err := r.db.QueryRow(query, id).Scan(&data)
+	query := fmt.Sprintf("SELECT * FROM %s WHERE id=@Id", Table_posts)
+	err := r.db.QueryRow(query, sql.Named("Id", id)).Scan(&data.Id, &data.Title, &data.Description, &data.Text, &data.Tags, &data.Rating)
 	return data, err
 }
 func (r *PostPostgres) Update(id string, input TonWork.PostUpdate) error {
@@ -53,23 +67,23 @@ func (r *PostPostgres) Update(id string, input TonWork.PostUpdate) error {
 	args := make([]interface{}, 0)
 	argId := 1
 	if input.Title != nil {
-		setValues = append(setValues, fmt.Sprintf("title=$%d", argId))
-		args = append(args, *input.Title)
+		setValues = append(setValues, "title=@Title")
+		args = append(args, sql.Named("Title", *input.Title))
 		argId++
 	}
 	if input.Description != nil {
-		setValues = append(setValues, fmt.Sprintf("description=$%d", argId))
-		args = append(args, *input.Description)
+		setValues = append(setValues, "description=@Description")
+		args = append(args, sql.Named("Description", *input.Description))
 		argId++
 	}
 	if input.Text != nil {
-		setValues = append(setValues, fmt.Sprintf("text=$%d", argId))
-		args = append(args, *input.Text)
+		setValues = append(setValues, "text=@Text")
+		args = append(args, sql.Named("Text", *input.Text))
 		argId++
 	}
 	if input.Tags != nil {
-		setValues = append(setValues, fmt.Sprintf("tags=$%d", argId))
-		args = append(args, *input.Tags)
+		setValues = append(setValues, "tags=@Tags")
+		args = append(args, sql.Named("Tags", *input.Tags))
 		argId++
 	}
 	setQuery := strings.Join(setValues, ", ")
@@ -79,7 +93,7 @@ func (r *PostPostgres) Update(id string, input TonWork.PostUpdate) error {
 	return err
 }
 func (r *PostPostgres) Delete(id string) error {
-	query := fmt.Sprintf("DELETE FROM %s WHERE id=$1", Table_posts)
-	_, err := r.db.Exec(query, id)
+	query := fmt.Sprintf("DELETE FROM %s WHERE id=@Id", Table_posts)
+	_, err := r.db.Exec(query, sql.Named("Id", id))
 	return err
 }
