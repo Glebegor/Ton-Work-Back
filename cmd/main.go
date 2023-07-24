@@ -29,7 +29,7 @@ func main() {
 	}
 	db, err := repositoryes.ConnectDB(repositoryes.ConfigDB{
 		Server:   viper.GetString("db.Server"),
-		Port:     viper.GetString("db.Port"),
+		Port:     os.Getenv("PORT"),
 		Database: viper.GetString("db.DBName"),
 		User:     viper.GetString("db.Username"),
 		Password: os.Getenv("DB_PASSWORD"),
