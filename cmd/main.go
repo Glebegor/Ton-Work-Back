@@ -56,7 +56,7 @@ func main() {
 	go hub.Run()
 
 	go func() {
-		err := server.Run(viper.GetString("Port"), handler.InitRoutes())
+		err := server.Run(os.Getenv("PORT"), handler.InitRoutes())
 		if err != nil {
 			logrus.Fatalf("Error while running server: %s", err.Error())
 		}
