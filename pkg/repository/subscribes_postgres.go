@@ -43,6 +43,7 @@ func (r *SubscribesPostgres) GetTimeToEnd(id int) (int, error) {
 	err := r.db.QueryRow(query, sql.Named("Id", id)).Scan(&SubTimeInfo.Id, &SubTimeInfo.Time_in_hours_to_end, &SubTimeInfo.UserId)
 	return SubTimeInfo.Time_in_hours_to_end, err
 }
+
 func (r *SubscribesPostgres) UpdateTimeOfSub() error {
 	tx, err := r.db.Begin()
 	if err != nil {
