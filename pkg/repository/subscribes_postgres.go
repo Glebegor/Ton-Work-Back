@@ -39,8 +39,8 @@ func (r *SubscribesPostgres) CancelSubscribe(id int) error {
 }
 func (r *SubscribesPostgres) GetTimeToEnd(id int) (int, error) {
 	var SubTimeInfo SubTime
-	query := fmt.Sprintf("SELECT * FROM %s WHERE id_user=$1", Table_user_sub)
-	err := r.db.QueryRow(query, id).Scan(&SubTimeInfo)
+	query := fmt.Sprintf("SELECT * FROM %s WHERE id_user=@Id", Table_user_sub)
+	err := r.db.QueryRow(query, sql.Named("Id", id)).Scan(&SubTimeInfo.Time_in_hours_to_end, &SubTimeInfo.Id, &SubTimeInfo.UserId)
 	return SubTimeInfo.Time_in_hours_to_end, err
 }
 func (r *SubscribesPostgres) UpdateTimeOfSub() error {
