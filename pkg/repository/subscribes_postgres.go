@@ -37,6 +37,7 @@ func (r *SubscribesPostgres) CancelSubscribe(id int) error {
 	_, err = r.db.Exec(query2, id)
 	return err
 }
+
 func (r *SubscribesPostgres) GetTimeToEnd(id int) (int, error) {
 	var SubTimeInfo SubTime
 	query := fmt.Sprintf("SELECT * FROM %s WHERE id_user=@Id", Table_user_sub)
