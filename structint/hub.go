@@ -1,4 +1,4 @@
-package TonWork
+package structint
 
 type Room struct {
 	Id      string             `json:"id"`

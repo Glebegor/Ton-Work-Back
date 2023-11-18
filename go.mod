@@ -1,4 +1,4 @@
-module github.com/TonWork/back
+module github.com/Glebegor/Ton-Work-Back
 
 go 1.20
 

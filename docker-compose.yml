@@ -1,0 +1,32 @@
+version: 'v1.0'
+services:
+  backtw:
+    image: ton-work
+    container_name: backtw
+    ports:
+      - '80:80'
+    restart: unless-stopped
+    depends_on:
+      - dbtw
+    networks:
+      - appnet
+      - internet
+
+  dbtw:
+    image: postgres
+    container_name: dbtw
+    restart: unless-stopped
+    ports:
+      - '5436:5432'
+    environment:
+      - 'POSTGRES_PASSWORD=123321'
+    networks:
+      - appnet
+
+networks:
+  internet:
+    name: internet
+    driver: bridge
+  appnet:
+    name: appnet
+    driver: bridge

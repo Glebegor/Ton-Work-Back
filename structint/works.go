@@ -1,4 +1,4 @@
-package TonWork
+package structint
 
 type Work struct {
 	Id              int    `json:"id" db:"id"`

@@ -2,7 +2,7 @@ Port: "8080"
 Host: "localhost"
 
 db:
-  Server: 'glebegor.database.windows.net'
-  Port: 1433
-  DBName: 'tonworkdbs'
-  Username: 'admindb'
+  Server: 'localhost'
+  Port: "5436"
+  DBName: 'ton-work'
+  Username: 'admin'

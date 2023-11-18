@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	TonWork "github.com/TonWork/back"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 )
 
 type WorkPostgres struct {

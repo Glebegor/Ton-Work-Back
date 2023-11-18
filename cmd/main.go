@@ -7,15 +7,15 @@ import (
 	"syscall"
 	"time"
 
-	TonWork "github.com/TonWork/back"
-	handlers "github.com/TonWork/back/pkg/handler"
-	repositoryes "github.com/TonWork/back/pkg/repository"
-	services "github.com/TonWork/back/pkg/service"
+	handlers "github.com/Glebegor/Ton-Work-Back/pkg/handler"
+	repositoryes "github.com/Glebegor/Ton-Work-Back/pkg/repository"
+	services "github.com/Glebegor/Ton-Work-Back/pkg/service"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 	godotenv "github.com/joho/godotenv"
 	logrus "github.com/sirupsen/logrus"
 	viper "github.com/spf13/viper"
 
-	_ "github.com/microsoft/go-mssqldb"
+	_ "github.com/lib/pq"
 )
 
 func main() {

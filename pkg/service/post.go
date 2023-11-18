@@ -3,8 +3,8 @@ package service
 import (
 	"strconv"
 
-	TonWork "github.com/TonWork/back"
-	"github.com/TonWork/back/pkg/repository"
+	"github.com/Glebegor/Ton-Work-Back/pkg/repository"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 )
 
 type PostService struct {

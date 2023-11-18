@@ -1,4 +1,4 @@
-package TonWork
+package structint
 
 import (
 	"context"

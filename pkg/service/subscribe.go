@@ -1,6 +1,6 @@
 package service
 
-import "github.com/TonWork/back/pkg/repository"
+import "github.com/Glebegor/Ton-Work-Back/pkg/repository"
 
 type SubscribesService struct {
 	repos repository.Subscribes

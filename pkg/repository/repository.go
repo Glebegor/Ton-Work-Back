@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	TonWork "github.com/TonWork/back"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 )
 
 type Authorization interface {

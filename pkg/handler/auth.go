@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	TonWork "github.com/TonWork/back"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,8 +1,8 @@
 package handler
 
 import (
-	TonWork "github.com/TonWork/back"
-	service "github.com/TonWork/back/pkg/service"
+	service "github.com/Glebegor/Ton-Work-Back/pkg/service"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 	gin "github.com/gin-gonic/gin"
 )
 

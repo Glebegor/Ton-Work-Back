@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	TonWork "github.com/TonWork/back"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 )
 
 type AuthPostgres struct {

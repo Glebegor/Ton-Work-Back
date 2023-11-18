@@ -1,8 +1,8 @@
 package service
 
 import (
-	TonWork "github.com/TonWork/back"
-	repository "github.com/TonWork/back/pkg/repository"
+	repository "github.com/Glebegor/Ton-Work-Back/pkg/repository"
+	TonWork "github.com/Glebegor/Ton-Work-Back/structint"
 )
 
 type Authorization interface {
