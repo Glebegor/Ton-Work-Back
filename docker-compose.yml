@@ -4,7 +4,7 @@ services:
     image: ton-work
     container_name: backtw
     ports:
-      - '80:80'
+      - '80:8080'
     restart: unless-stopped
     depends_on:
       - dbtw
