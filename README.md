@@ -29,6 +29,9 @@ This command will create migrations for your database.<br>
 This command will run project.<br>
 <code>go run cmd/main.go</code>
 
+<h3>Loading by docker compose</h3>
+<code>docker compose build</code><br>
+<code>docker compose up</code>
 
 <h3>Work with API</h3>
 
